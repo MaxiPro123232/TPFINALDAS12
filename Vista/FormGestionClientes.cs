@@ -15,8 +15,8 @@ namespace TechStore.Vistas
             InitializeComponent();
             _context = new TechStoreDbContext();
             _controller = new ClienteController(_context);
-            CargarDatos();
             CargarCombos();
+            CargarDatos();
         }
 
         private void CargarCombos()
@@ -40,7 +40,10 @@ namespace TechStore.Vistas
             txtTelefono.Clear();
             txtEmail.Clear();
             txtDescuento.Clear();
-            cmbTipoCliente.SelectedIndex = 0;
+            if (cmbTipoCliente.Items.Count > 0)
+            {
+                cmbTipoCliente.SelectedIndex = 0;
+            }
             btnActualizar.Enabled = false;
             btnEliminar.Enabled = false;
             btnNuevo.Enabled = true;

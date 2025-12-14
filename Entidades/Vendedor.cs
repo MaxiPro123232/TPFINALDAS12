@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace TechStore.Entidades
 {
@@ -24,6 +25,7 @@ namespace TechStore.Entidades
         [Required]
         public int SucursalId { get; set; }
 
+        [ForeignKey("SucursalId")]
         public virtual Sucursal Sucursal { get; set; } = null!;
 
         public virtual ICollection<Venta> Ventas { get; set; } = new List<Venta>();
