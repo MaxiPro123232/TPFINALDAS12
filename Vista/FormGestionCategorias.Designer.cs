@@ -34,7 +34,7 @@ namespace TechStore.Vistas
             dgvCategorias.AllowUserToAddRows = false;
             dgvCategorias.AllowUserToDeleteRows = false;
             dgvCategorias.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvCategorias.Location = new Point(20, 200);
+            dgvCategorias.Location = new Point(20, 208);
             dgvCategorias.Name = "dgvCategorias";
             dgvCategorias.ReadOnly = true;
             dgvCategorias.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
@@ -129,7 +129,7 @@ namespace TechStore.Vistas
             groupBox1.Controls.Add(btnEliminar);
             groupBox1.Location = new Point(20, 20);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(600, 174);
+            groupBox1.Size = new Size(600, 181);
             groupBox1.TabIndex = 9;
             groupBox1.TabStop = false;
             groupBox1.Text = "Datos de la Categoría";

@@ -15,360 +15,360 @@ namespace TechStore.Vistas
 
         private void InitializeComponent()
         {
-            this.groupBox1 = new GroupBox();
-            this.cmbMetodoPago = new ComboBox();
-            this.cmbSucursal = new ComboBox();
-            this.cmbVendedor = new ComboBox();
-            this.cmbCliente = new ComboBox();
-            this.lblMetodoPago = new Label();
-            this.lblSucursal = new Label();
-            this.lblVendedor = new Label();
-            this.lblCliente = new Label();
-            this.groupBox2 = new GroupBox();
-            this.btnAgregarProducto = new Button();
-            this.txtDescuentoDetalle = new TextBox();
-            this.txtCantidad = new TextBox();
-            this.cmbProducto = new ComboBox();
-            this.lblDescuentoDetalle = new Label();
-            this.lblCantidad = new Label();
-            this.lblProducto = new Label();
-            this.groupBox3 = new GroupBox();
-            this.btnEliminarDetalle = new Button();
-            this.dgvDetalles = new DataGridView();
-            this.groupBox4 = new GroupBox();
-            this.lblTotal = new Label();
-            this.lblDescuento = new Label();
-            this.lblSubtotal = new Label();
-            this.lblTotalLabel = new Label();
-            this.lblDescuentoLabel = new Label();
-            this.lblSubtotalLabel = new Label();
-            this.btnProcesarVenta = new Button();
-            this.btnNuevaVenta = new Button();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvDetalles)).BeginInit();
-            this.groupBox1.SuspendLayout();
-            this.groupBox2.SuspendLayout();
-            this.groupBox3.SuspendLayout();
-            this.groupBox4.SuspendLayout();
-            this.SuspendLayout();
+            groupBox1 = new GroupBox();
+            cmbMetodoPago = new ComboBox();
+            cmbSucursal = new ComboBox();
+            cmbVendedor = new ComboBox();
+            cmbCliente = new ComboBox();
+            lblMetodoPago = new Label();
+            lblSucursal = new Label();
+            lblVendedor = new Label();
+            lblCliente = new Label();
+            groupBox2 = new GroupBox();
+            btnAgregarProducto = new Button();
+            txtDescuentoDetalle = new TextBox();
+            txtCantidad = new TextBox();
+            cmbProducto = new ComboBox();
+            lblDescuentoDetalle = new Label();
+            lblCantidad = new Label();
+            lblProducto = new Label();
+            groupBox3 = new GroupBox();
+            btnEliminarDetalle = new Button();
+            dgvDetalles = new DataGridView();
+            groupBox4 = new GroupBox();
+            lblTotal = new Label();
+            lblDescuento = new Label();
+            lblSubtotal = new Label();
+            lblTotalLabel = new Label();
+            lblDescuentoLabel = new Label();
+            lblSubtotalLabel = new Label();
+            btnProcesarVenta = new Button();
+            btnNuevaVenta = new Button();
+            groupBox1.SuspendLayout();
+            groupBox2.SuspendLayout();
+            groupBox3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dgvDetalles).BeginInit();
+            groupBox4.SuspendLayout();
+            SuspendLayout();
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.cmbMetodoPago);
-            this.groupBox1.Controls.Add(this.cmbSucursal);
-            this.groupBox1.Controls.Add(this.cmbVendedor);
-            this.groupBox1.Controls.Add(this.cmbCliente);
-            this.groupBox1.Controls.Add(this.lblMetodoPago);
-            this.groupBox1.Controls.Add(this.lblSucursal);
-            this.groupBox1.Controls.Add(this.lblVendedor);
-            this.groupBox1.Controls.Add(this.lblCliente);
-            this.groupBox1.Location = new Point(20, 20);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new Size(500, 150);
-            this.groupBox1.TabIndex = 0;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Datos de la Venta";
+            groupBox1.Controls.Add(cmbMetodoPago);
+            groupBox1.Controls.Add(cmbSucursal);
+            groupBox1.Controls.Add(cmbVendedor);
+            groupBox1.Controls.Add(cmbCliente);
+            groupBox1.Controls.Add(lblMetodoPago);
+            groupBox1.Controls.Add(lblSucursal);
+            groupBox1.Controls.Add(lblVendedor);
+            groupBox1.Controls.Add(lblCliente);
+            groupBox1.Location = new Point(20, 20);
+            groupBox1.Name = "groupBox1";
+            groupBox1.Size = new Size(500, 150);
+            groupBox1.TabIndex = 0;
+            groupBox1.TabStop = false;
+            groupBox1.Text = "Datos de la Venta";
             // 
             // cmbMetodoPago
             // 
-            this.cmbMetodoPago.DropDownStyle = ComboBoxStyle.DropDownList;
-            this.cmbMetodoPago.FormattingEnabled = true;
-            this.cmbMetodoPago.Location = new Point(120, 110);
-            this.cmbMetodoPago.Name = "cmbMetodoPago";
-            this.cmbMetodoPago.Size = new Size(350, 23);
-            this.cmbMetodoPago.TabIndex = 7;
+            cmbMetodoPago.DropDownStyle = ComboBoxStyle.DropDownList;
+            cmbMetodoPago.FormattingEnabled = true;
+            cmbMetodoPago.Location = new Point(120, 110);
+            cmbMetodoPago.Name = "cmbMetodoPago";
+            cmbMetodoPago.Size = new Size(350, 23);
+            cmbMetodoPago.TabIndex = 7;
             // 
             // cmbSucursal
             // 
-            this.cmbSucursal.DropDownStyle = ComboBoxStyle.DropDownList;
-            this.cmbSucursal.FormattingEnabled = true;
-            this.cmbSucursal.Location = new Point(120, 80);
-            this.cmbSucursal.Name = "cmbSucursal";
-            this.cmbSucursal.Size = new Size(350, 23);
-            this.cmbSucursal.TabIndex = 6;
+            cmbSucursal.DropDownStyle = ComboBoxStyle.DropDownList;
+            cmbSucursal.FormattingEnabled = true;
+            cmbSucursal.Location = new Point(120, 80);
+            cmbSucursal.Name = "cmbSucursal";
+            cmbSucursal.Size = new Size(350, 23);
+            cmbSucursal.TabIndex = 6;
             // 
             // cmbVendedor
             // 
-            this.cmbVendedor.DropDownStyle = ComboBoxStyle.DropDownList;
-            this.cmbVendedor.FormattingEnabled = true;
-            this.cmbVendedor.Location = new Point(120, 50);
-            this.cmbVendedor.Name = "cmbVendedor";
-            this.cmbVendedor.Size = new Size(350, 23);
-            this.cmbVendedor.TabIndex = 5;
+            cmbVendedor.DropDownStyle = ComboBoxStyle.DropDownList;
+            cmbVendedor.FormattingEnabled = true;
+            cmbVendedor.Location = new Point(120, 50);
+            cmbVendedor.Name = "cmbVendedor";
+            cmbVendedor.Size = new Size(350, 23);
+            cmbVendedor.TabIndex = 5;
             // 
             // cmbCliente
             // 
-            this.cmbCliente.DropDownStyle = ComboBoxStyle.DropDownList;
-            this.cmbCliente.FormattingEnabled = true;
-            this.cmbCliente.Location = new Point(120, 20);
-            this.cmbCliente.Name = "cmbCliente";
-            this.cmbCliente.Size = new Size(350, 23);
-            this.cmbCliente.TabIndex = 4;
-            this.cmbCliente.SelectionChangeCommitted += new EventHandler(this.cmbCliente_SelectionChanged);
+            cmbCliente.DropDownStyle = ComboBoxStyle.DropDownList;
+            cmbCliente.FormattingEnabled = true;
+            cmbCliente.Location = new Point(120, 20);
+            cmbCliente.Name = "cmbCliente";
+            cmbCliente.Size = new Size(350, 23);
+            cmbCliente.TabIndex = 4;
+            cmbCliente.SelectionChangeCommitted += cmbCliente_SelectionChanged;
             // 
             // lblMetodoPago
             // 
-            this.lblMetodoPago.AutoSize = true;
-            this.lblMetodoPago.Location = new Point(20, 113);
-            this.lblMetodoPago.Name = "lblMetodoPago";
-            this.lblMetodoPago.Size = new Size(88, 15);
-            this.lblMetodoPago.TabIndex = 3;
-            this.lblMetodoPago.Text = "Método de Pago:";
+            lblMetodoPago.AutoSize = true;
+            lblMetodoPago.Location = new Point(20, 113);
+            lblMetodoPago.Name = "lblMetodoPago";
+            lblMetodoPago.Size = new Size(98, 15);
+            lblMetodoPago.TabIndex = 3;
+            lblMetodoPago.Text = "Método de Pago:";
             // 
             // lblSucursal
             // 
-            this.lblSucursal.AutoSize = true;
-            this.lblSucursal.Location = new Point(20, 83);
-            this.lblSucursal.Name = "lblSucursal";
-            this.lblSucursal.Size = new Size(57, 15);
-            this.lblSucursal.TabIndex = 2;
-            this.lblSucursal.Text = "Sucursal:";
+            lblSucursal.AutoSize = true;
+            lblSucursal.Location = new Point(20, 83);
+            lblSucursal.Name = "lblSucursal";
+            lblSucursal.Size = new Size(54, 15);
+            lblSucursal.TabIndex = 2;
+            lblSucursal.Text = "Sucursal:";
             // 
             // lblVendedor
             // 
-            this.lblVendedor.AutoSize = true;
-            this.lblVendedor.Location = new Point(20, 53);
-            this.lblVendedor.Name = "lblVendedor";
-            this.lblVendedor.Size = new Size(60, 15);
-            this.lblVendedor.TabIndex = 1;
-            this.lblVendedor.Text = "Vendedor:";
+            lblVendedor.AutoSize = true;
+            lblVendedor.Location = new Point(20, 53);
+            lblVendedor.Name = "lblVendedor";
+            lblVendedor.Size = new Size(60, 15);
+            lblVendedor.TabIndex = 1;
+            lblVendedor.Text = "Vendedor:";
             // 
             // lblCliente
             // 
-            this.lblCliente.AutoSize = true;
-            this.lblCliente.Location = new Point(20, 23);
-            this.lblCliente.Name = "lblCliente";
-            this.lblCliente.Size = new Size(47, 15);
-            this.lblCliente.TabIndex = 0;
-            this.lblCliente.Text = "Cliente:";
+            lblCliente.AutoSize = true;
+            lblCliente.Location = new Point(20, 23);
+            lblCliente.Name = "lblCliente";
+            lblCliente.Size = new Size(47, 15);
+            lblCliente.TabIndex = 0;
+            lblCliente.Text = "Cliente:";
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.btnAgregarProducto);
-            this.groupBox2.Controls.Add(this.txtDescuentoDetalle);
-            this.groupBox2.Controls.Add(this.txtCantidad);
-            this.groupBox2.Controls.Add(this.cmbProducto);
-            this.groupBox2.Controls.Add(this.lblDescuentoDetalle);
-            this.groupBox2.Controls.Add(this.lblCantidad);
-            this.groupBox2.Controls.Add(this.lblProducto);
-            this.groupBox2.Location = new Point(540, 20);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new Size(400, 150);
-            this.groupBox2.TabIndex = 1;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Agregar Producto";
+            groupBox2.Controls.Add(btnAgregarProducto);
+            groupBox2.Controls.Add(txtDescuentoDetalle);
+            groupBox2.Controls.Add(txtCantidad);
+            groupBox2.Controls.Add(cmbProducto);
+            groupBox2.Controls.Add(lblDescuentoDetalle);
+            groupBox2.Controls.Add(lblCantidad);
+            groupBox2.Controls.Add(lblProducto);
+            groupBox2.Location = new Point(540, 20);
+            groupBox2.Name = "groupBox2";
+            groupBox2.Size = new Size(400, 164);
+            groupBox2.TabIndex = 1;
+            groupBox2.TabStop = false;
+            groupBox2.Text = "Agregar Producto";
             // 
             // btnAgregarProducto
             // 
-            this.btnAgregarProducto.Location = new Point(20, 110);
-            this.btnAgregarProducto.Name = "btnAgregarProducto";
-            this.btnAgregarProducto.Size = new Size(350, 30);
-            this.btnAgregarProducto.TabIndex = 6;
-            this.btnAgregarProducto.Text = "Agregar Producto";
-            this.btnAgregarProducto.UseVisualStyleBackColor = true;
-            this.btnAgregarProducto.Click += new EventHandler(this.btnAgregarProducto_Click);
+            btnAgregarProducto.Location = new Point(20, 110);
+            btnAgregarProducto.Name = "btnAgregarProducto";
+            btnAgregarProducto.Size = new Size(350, 30);
+            btnAgregarProducto.TabIndex = 6;
+            btnAgregarProducto.Text = "Agregar Producto";
+            btnAgregarProducto.UseVisualStyleBackColor = true;
+            btnAgregarProducto.Click += btnAgregarProducto_Click;
             // 
             // txtDescuentoDetalle
             // 
-            this.txtDescuentoDetalle.Location = new Point(120, 80);
-            this.txtDescuentoDetalle.Name = "txtDescuentoDetalle";
-            this.txtDescuentoDetalle.Size = new Size(250, 23);
-            this.txtDescuentoDetalle.TabIndex = 5;
-            this.txtDescuentoDetalle.Text = "0";
+            txtDescuentoDetalle.Location = new Point(120, 80);
+            txtDescuentoDetalle.Name = "txtDescuentoDetalle";
+            txtDescuentoDetalle.Size = new Size(250, 23);
+            txtDescuentoDetalle.TabIndex = 5;
+            txtDescuentoDetalle.Text = "0";
             // 
             // txtCantidad
             // 
-            this.txtCantidad.Location = new Point(120, 50);
-            this.txtCantidad.Name = "txtCantidad";
-            this.txtCantidad.Size = new Size(250, 23);
-            this.txtCantidad.TabIndex = 4;
-            this.txtCantidad.Text = "1";
+            txtCantidad.Location = new Point(120, 50);
+            txtCantidad.Name = "txtCantidad";
+            txtCantidad.Size = new Size(250, 23);
+            txtCantidad.TabIndex = 4;
+            txtCantidad.Text = "1";
             // 
             // cmbProducto
             // 
-            this.cmbProducto.DropDownStyle = ComboBoxStyle.DropDownList;
-            this.cmbProducto.FormattingEnabled = true;
-            this.cmbProducto.Location = new Point(120, 20);
-            this.cmbProducto.Name = "cmbProducto";
-            this.cmbProducto.Size = new Size(250, 23);
-            this.cmbProducto.TabIndex = 3;
+            cmbProducto.DropDownStyle = ComboBoxStyle.DropDownList;
+            cmbProducto.FormattingEnabled = true;
+            cmbProducto.Location = new Point(120, 20);
+            cmbProducto.Name = "cmbProducto";
+            cmbProducto.Size = new Size(250, 23);
+            cmbProducto.TabIndex = 3;
             // 
             // lblDescuentoDetalle
             // 
-            this.lblDescuentoDetalle.AutoSize = true;
-            this.lblDescuentoDetalle.Location = new Point(20, 83);
-            this.lblDescuentoDetalle.Name = "lblDescuentoDetalle";
-            this.lblDescuentoDetalle.Size = new Size(65, 15);
-            this.lblDescuentoDetalle.TabIndex = 2;
-            this.lblDescuentoDetalle.Text = "Descuento:";
+            lblDescuentoDetalle.AutoSize = true;
+            lblDescuentoDetalle.Location = new Point(20, 83);
+            lblDescuentoDetalle.Name = "lblDescuentoDetalle";
+            lblDescuentoDetalle.Size = new Size(66, 15);
+            lblDescuentoDetalle.TabIndex = 2;
+            lblDescuentoDetalle.Text = "Descuento:";
             // 
             // lblCantidad
             // 
-            this.lblCantidad.AutoSize = true;
-            this.lblCantidad.Location = new Point(20, 53);
-            this.lblCantidad.Name = "lblCantidad";
-            this.lblCantidad.Size = new Size(58, 15);
-            this.lblCantidad.TabIndex = 1;
-            this.lblCantidad.Text = "Cantidad:";
+            lblCantidad.AutoSize = true;
+            lblCantidad.Location = new Point(20, 53);
+            lblCantidad.Name = "lblCantidad";
+            lblCantidad.Size = new Size(58, 15);
+            lblCantidad.TabIndex = 1;
+            lblCantidad.Text = "Cantidad:";
             // 
             // lblProducto
             // 
-            this.lblProducto.AutoSize = true;
-            this.lblProducto.Location = new Point(20, 23);
-            this.lblProducto.Name = "lblProducto";
-            this.lblProducto.Size = new Size(59, 15);
-            this.lblProducto.TabIndex = 0;
-            this.lblProducto.Text = "Producto:";
+            lblProducto.AutoSize = true;
+            lblProducto.Location = new Point(20, 23);
+            lblProducto.Name = "lblProducto";
+            lblProducto.Size = new Size(59, 15);
+            lblProducto.TabIndex = 0;
+            lblProducto.Text = "Producto:";
             // 
             // groupBox3
             // 
-            this.groupBox3.Controls.Add(this.btnEliminarDetalle);
-            this.groupBox3.Controls.Add(this.dgvDetalles);
-            this.groupBox3.Location = new Point(20, 190);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new Size(920, 250);
-            this.groupBox3.TabIndex = 2;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "Detalles de la Venta";
+            groupBox3.Controls.Add(btnEliminarDetalle);
+            groupBox3.Controls.Add(dgvDetalles);
+            groupBox3.Location = new Point(20, 190);
+            groupBox3.Name = "groupBox3";
+            groupBox3.Size = new Size(920, 250);
+            groupBox3.TabIndex = 2;
+            groupBox3.TabStop = false;
+            groupBox3.Text = "Detalles de la Venta";
             // 
             // btnEliminarDetalle
             // 
-            this.btnEliminarDetalle.Location = new Point(20, 210);
-            this.btnEliminarDetalle.Name = "btnEliminarDetalle";
-            this.btnEliminarDetalle.Size = new Size(150, 30);
-            this.btnEliminarDetalle.TabIndex = 1;
-            this.btnEliminarDetalle.Text = "Eliminar Producto";
-            this.btnEliminarDetalle.UseVisualStyleBackColor = true;
-            this.btnEliminarDetalle.Click += new EventHandler(this.btnEliminarDetalle_Click);
+            btnEliminarDetalle.Location = new Point(20, 210);
+            btnEliminarDetalle.Name = "btnEliminarDetalle";
+            btnEliminarDetalle.Size = new Size(150, 30);
+            btnEliminarDetalle.TabIndex = 1;
+            btnEliminarDetalle.Text = "Eliminar Producto";
+            btnEliminarDetalle.UseVisualStyleBackColor = true;
+            btnEliminarDetalle.Click += btnEliminarDetalle_Click;
             // 
             // dgvDetalles
             // 
-            this.dgvDetalles.AllowUserToAddRows = false;
-            this.dgvDetalles.AllowUserToDeleteRows = false;
-            this.dgvDetalles.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvDetalles.Location = new Point(20, 20);
-            this.dgvDetalles.Name = "dgvDetalles";
-            this.dgvDetalles.ReadOnly = true;
-            this.dgvDetalles.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            this.dgvDetalles.Size = new Size(880, 180);
-            this.dgvDetalles.TabIndex = 0;
+            dgvDetalles.AllowUserToAddRows = false;
+            dgvDetalles.AllowUserToDeleteRows = false;
+            dgvDetalles.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvDetalles.Location = new Point(20, 20);
+            dgvDetalles.Name = "dgvDetalles";
+            dgvDetalles.ReadOnly = true;
+            dgvDetalles.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgvDetalles.Size = new Size(880, 180);
+            dgvDetalles.TabIndex = 0;
             // 
             // groupBox4
             // 
-            this.groupBox4.Controls.Add(this.lblTotal);
-            this.groupBox4.Controls.Add(this.lblDescuento);
-            this.groupBox4.Controls.Add(this.lblSubtotal);
-            this.groupBox4.Controls.Add(this.lblTotalLabel);
-            this.groupBox4.Controls.Add(this.lblDescuentoLabel);
-            this.groupBox4.Controls.Add(this.lblSubtotalLabel);
-            this.groupBox4.Location = new Point(20, 460);
-            this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new Size(500, 120);
-            this.groupBox4.TabIndex = 3;
-            this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "Totales";
+            groupBox4.Controls.Add(lblTotal);
+            groupBox4.Controls.Add(lblDescuento);
+            groupBox4.Controls.Add(lblSubtotal);
+            groupBox4.Controls.Add(lblTotalLabel);
+            groupBox4.Controls.Add(lblDescuentoLabel);
+            groupBox4.Controls.Add(lblSubtotalLabel);
+            groupBox4.Location = new Point(20, 460);
+            groupBox4.Name = "groupBox4";
+            groupBox4.Size = new Size(500, 120);
+            groupBox4.TabIndex = 3;
+            groupBox4.TabStop = false;
+            groupBox4.Text = "Totales";
             // 
             // lblTotal
             // 
-            this.lblTotal.AutoSize = true;
-            this.lblTotal.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            this.lblTotal.Location = new Point(120, 80);
-            this.lblTotal.Name = "lblTotal";
-            this.lblTotal.Size = new Size(38, 21);
-            this.lblTotal.TabIndex = 5;
-            this.lblTotal.Text = "0.00";
+            lblTotal.AutoSize = true;
+            lblTotal.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+            lblTotal.Location = new Point(120, 80);
+            lblTotal.Name = "lblTotal";
+            lblTotal.Size = new Size(41, 21);
+            lblTotal.TabIndex = 5;
+            lblTotal.Text = "0.00";
             // 
             // lblDescuento
             // 
-            this.lblDescuento.AutoSize = true;
-            this.lblDescuento.Location = new Point(120, 50);
-            this.lblDescuento.Name = "lblDescuento";
-            this.lblDescuento.Size = new Size(28, 15);
-            this.lblDescuento.TabIndex = 4;
-            this.lblDescuento.Text = "0.00";
+            lblDescuento.AutoSize = true;
+            lblDescuento.Location = new Point(120, 50);
+            lblDescuento.Name = "lblDescuento";
+            lblDescuento.Size = new Size(28, 15);
+            lblDescuento.TabIndex = 4;
+            lblDescuento.Text = "0.00";
             // 
             // lblSubtotal
             // 
-            this.lblSubtotal.AutoSize = true;
-            this.lblSubtotal.Location = new Point(120, 20);
-            this.lblSubtotal.Name = "lblSubtotal";
-            this.lblSubtotal.Size = new Size(28, 15);
-            this.lblSubtotal.TabIndex = 3;
-            this.lblSubtotal.Text = "0.00";
+            lblSubtotal.AutoSize = true;
+            lblSubtotal.Location = new Point(120, 20);
+            lblSubtotal.Name = "lblSubtotal";
+            lblSubtotal.Size = new Size(28, 15);
+            lblSubtotal.TabIndex = 3;
+            lblSubtotal.Text = "0.00";
             // 
             // lblTotalLabel
             // 
-            this.lblTotalLabel.AutoSize = true;
-            this.lblTotalLabel.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            this.lblTotalLabel.Location = new Point(20, 80);
-            this.lblTotalLabel.Name = "lblTotalLabel";
-            this.lblTotalLabel.Size = new Size(49, 21);
-            this.lblTotalLabel.TabIndex = 2;
-            this.lblTotalLabel.Text = "Total:";
+            lblTotalLabel.AutoSize = true;
+            lblTotalLabel.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+            lblTotalLabel.Location = new Point(20, 80);
+            lblTotalLabel.Name = "lblTotalLabel";
+            lblTotalLabel.Size = new Size(52, 21);
+            lblTotalLabel.TabIndex = 2;
+            lblTotalLabel.Text = "Total:";
             // 
             // lblDescuentoLabel
             // 
-            this.lblDescuentoLabel.AutoSize = true;
-            this.lblDescuentoLabel.Location = new Point(20, 50);
-            this.lblDescuentoLabel.Name = "lblDescuentoLabel";
-            this.lblDescuentoLabel.Size = new Size(65, 15);
-            this.lblDescuentoLabel.TabIndex = 1;
-            this.lblDescuentoLabel.Text = "Descuento:";
+            lblDescuentoLabel.AutoSize = true;
+            lblDescuentoLabel.Location = new Point(20, 50);
+            lblDescuentoLabel.Name = "lblDescuentoLabel";
+            lblDescuentoLabel.Size = new Size(66, 15);
+            lblDescuentoLabel.TabIndex = 1;
+            lblDescuentoLabel.Text = "Descuento:";
             // 
             // lblSubtotalLabel
             // 
-            this.lblSubtotalLabel.AutoSize = true;
-            this.lblSubtotalLabel.Location = new Point(20, 20);
-            this.lblSubtotalLabel.Name = "lblSubtotalLabel";
-            this.lblSubtotalLabel.Size = new Size(57, 15);
-            this.lblSubtotalLabel.TabIndex = 0;
-            this.lblSubtotalLabel.Text = "Subtotal:";
+            lblSubtotalLabel.AutoSize = true;
+            lblSubtotalLabel.Location = new Point(20, 20);
+            lblSubtotalLabel.Name = "lblSubtotalLabel";
+            lblSubtotalLabel.Size = new Size(54, 15);
+            lblSubtotalLabel.TabIndex = 0;
+            lblSubtotalLabel.Text = "Subtotal:";
             // 
             // btnProcesarVenta
             // 
-            this.btnProcesarVenta.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            this.btnProcesarVenta.Location = new Point(540, 460);
-            this.btnProcesarVenta.Name = "btnProcesarVenta";
-            this.btnProcesarVenta.Size = new Size(200, 60);
-            this.btnProcesarVenta.TabIndex = 4;
-            this.btnProcesarVenta.Text = "Procesar Venta";
-            this.btnProcesarVenta.UseVisualStyleBackColor = true;
-            this.btnProcesarVenta.Click += new EventHandler(this.btnProcesarVenta_Click);
+            btnProcesarVenta.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+            btnProcesarVenta.Location = new Point(540, 460);
+            btnProcesarVenta.Name = "btnProcesarVenta";
+            btnProcesarVenta.Size = new Size(200, 60);
+            btnProcesarVenta.TabIndex = 4;
+            btnProcesarVenta.Text = "Procesar Venta";
+            btnProcesarVenta.UseVisualStyleBackColor = true;
+            btnProcesarVenta.Click += btnProcesarVenta_Click;
             // 
             // btnNuevaVenta
             // 
-            this.btnNuevaVenta.Location = new Point(760, 460);
-            this.btnNuevaVenta.Name = "btnNuevaVenta";
-            this.btnNuevaVenta.Size = new Size(180, 60);
-            this.btnNuevaVenta.TabIndex = 5;
-            this.btnNuevaVenta.Text = "Nueva Venta";
-            this.btnNuevaVenta.UseVisualStyleBackColor = true;
-            this.btnNuevaVenta.Click += new EventHandler(this.btnNuevaVenta_Click);
+            btnNuevaVenta.Location = new Point(760, 460);
+            btnNuevaVenta.Name = "btnNuevaVenta";
+            btnNuevaVenta.Size = new Size(180, 60);
+            btnNuevaVenta.TabIndex = 5;
+            btnNuevaVenta.Text = "Nueva Venta";
+            btnNuevaVenta.UseVisualStyleBackColor = true;
+            btnNuevaVenta.Click += btnNuevaVenta_Click;
             // 
             // FormGestionVentas
             // 
-            this.AutoScaleDimensions = new SizeF(7F, 15F);
-            this.AutoScaleMode = AutoScaleMode.Font;
-            this.ClientSize = new Size(960, 600);
-            this.Controls.Add(this.btnNuevaVenta);
-            this.Controls.Add(this.btnProcesarVenta);
-            this.Controls.Add(this.groupBox4);
-            this.Controls.Add(this.groupBox3);
-            this.Controls.Add(this.groupBox2);
-            this.Controls.Add(this.groupBox1);
-            this.FormBorderStyle = FormBorderStyle.FixedSingle;
-            this.MaximizeBox = false;
-            this.Name = "FormGestionVentas";
-            this.StartPosition = FormStartPosition.CenterScreen;
-            this.Text = "Gestión de Ventas";
-            ((System.ComponentModel.ISupportInitialize)(this.dgvDetalles)).EndInit();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
-            this.groupBox3.ResumeLayout(false);
-            this.groupBox4.ResumeLayout(false);
-            this.groupBox4.PerformLayout();
-            this.ResumeLayout(false);
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(960, 600);
+            Controls.Add(btnNuevaVenta);
+            Controls.Add(btnProcesarVenta);
+            Controls.Add(groupBox4);
+            Controls.Add(groupBox3);
+            Controls.Add(groupBox2);
+            Controls.Add(groupBox1);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
+            MaximizeBox = false;
+            Name = "FormGestionVentas";
+            StartPosition = FormStartPosition.CenterScreen;
+            Text = "Gestión de Ventas";
+            groupBox1.ResumeLayout(false);
+            groupBox1.PerformLayout();
+            groupBox2.ResumeLayout(false);
+            groupBox2.PerformLayout();
+            groupBox3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)dgvDetalles).EndInit();
+            groupBox4.ResumeLayout(false);
+            groupBox4.PerformLayout();
+            ResumeLayout(false);
         }
 
         private GroupBox groupBox1;

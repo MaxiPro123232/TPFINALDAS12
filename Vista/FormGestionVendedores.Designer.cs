@@ -190,7 +190,7 @@ namespace TechStore.Vistas
             groupBox1.Controls.Add(btnEliminar);
             groupBox1.Location = new Point(20, 20);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(700, 206);
+            groupBox1.Size = new Size(700, 214);
             groupBox1.TabIndex = 15;
             groupBox1.TabStop = false;
             groupBox1.Text = "Datos del Vendedor";

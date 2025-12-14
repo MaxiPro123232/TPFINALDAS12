@@ -15,313 +15,313 @@ namespace TechStore.Vistas
 
         private void InitializeComponent()
         {
-            this.dgvProductos = new DataGridView();
-            this.txtCodigo = new TextBox();
-            this.txtNombre = new TextBox();
-            this.txtDescripcion = new TextBox();
-            this.txtPrecio = new TextBox();
-            this.txtStock = new TextBox();
-            this.cmbCategoria = new ComboBox();
-            this.cmbSucursal = new ComboBox();
-            this.btnNuevo = new Button();
-            this.btnGuardar = new Button();
-            this.btnActualizar = new Button();
-            this.btnEliminar = new Button();
-            this.lblCodigo = new Label();
-            this.lblNombre = new Label();
-            this.lblDescripcion = new Label();
-            this.lblPrecio = new Label();
-            this.lblStock = new Label();
-            this.lblCategoria = new Label();
-            this.lblSucursal = new Label();
-            this.groupBox1 = new GroupBox();
-            this.groupBox2 = new GroupBox();
-            this.btnConsultar = new Button();
-            this.txtNombreConsulta = new TextBox();
-            this.cmbSucursalConsulta = new ComboBox();
-            this.lblSucursalConsulta = new Label();
-            this.lblNombreConsulta = new Label();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvProductos)).BeginInit();
-            this.groupBox1.SuspendLayout();
-            this.groupBox2.SuspendLayout();
-            this.SuspendLayout();
+            dgvProductos = new DataGridView();
+            txtCodigo = new TextBox();
+            txtNombre = new TextBox();
+            txtDescripcion = new TextBox();
+            txtPrecio = new TextBox();
+            txtStock = new TextBox();
+            cmbCategoria = new ComboBox();
+            cmbSucursal = new ComboBox();
+            btnNuevo = new Button();
+            btnGuardar = new Button();
+            btnActualizar = new Button();
+            btnEliminar = new Button();
+            lblCodigo = new Label();
+            lblNombre = new Label();
+            lblDescripcion = new Label();
+            lblPrecio = new Label();
+            lblStock = new Label();
+            lblCategoria = new Label();
+            lblSucursal = new Label();
+            groupBox1 = new GroupBox();
+            groupBox2 = new GroupBox();
+            btnConsultar = new Button();
+            txtNombreConsulta = new TextBox();
+            cmbSucursalConsulta = new ComboBox();
+            lblSucursalConsulta = new Label();
+            lblNombreConsulta = new Label();
+            ((System.ComponentModel.ISupportInitialize)dgvProductos).BeginInit();
+            groupBox1.SuspendLayout();
+            groupBox2.SuspendLayout();
+            SuspendLayout();
             // 
             // dgvProductos
             // 
-            this.dgvProductos.AllowUserToAddRows = false;
-            this.dgvProductos.AllowUserToDeleteRows = false;
-            this.dgvProductos.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvProductos.Location = new Point(20, 300);
-            this.dgvProductos.Name = "dgvProductos";
-            this.dgvProductos.ReadOnly = true;
-            this.dgvProductos.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            this.dgvProductos.Size = new Size(900, 300);
-            this.dgvProductos.TabIndex = 0;
-            this.dgvProductos.SelectionChanged += new EventHandler(this.dgvProductos_SelectionChanged);
+            dgvProductos.AllowUserToAddRows = false;
+            dgvProductos.AllowUserToDeleteRows = false;
+            dgvProductos.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvProductos.Location = new Point(20, 300);
+            dgvProductos.Name = "dgvProductos";
+            dgvProductos.ReadOnly = true;
+            dgvProductos.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgvProductos.Size = new Size(900, 300);
+            dgvProductos.TabIndex = 0;
+            dgvProductos.SelectionChanged += dgvProductos_SelectionChanged;
             // 
             // txtCodigo
             // 
-            this.txtCodigo.Location = new Point(120, 30);
-            this.txtCodigo.Name = "txtCodigo";
-            this.txtCodigo.Size = new Size(200, 23);
-            this.txtCodigo.TabIndex = 1;
+            txtCodigo.Location = new Point(120, 30);
+            txtCodigo.Name = "txtCodigo";
+            txtCodigo.Size = new Size(200, 23);
+            txtCodigo.TabIndex = 1;
             // 
             // txtNombre
             // 
-            this.txtNombre.Location = new Point(120, 70);
-            this.txtNombre.Name = "txtNombre";
-            this.txtNombre.Size = new Size(200, 23);
-            this.txtNombre.TabIndex = 2;
+            txtNombre.Location = new Point(120, 70);
+            txtNombre.Name = "txtNombre";
+            txtNombre.Size = new Size(200, 23);
+            txtNombre.TabIndex = 2;
             // 
             // txtDescripcion
             // 
-            this.txtDescripcion.Location = new Point(120, 110);
-            this.txtDescripcion.Multiline = true;
-            this.txtDescripcion.Name = "txtDescripcion";
-            this.txtDescripcion.Size = new Size(200, 60);
-            this.txtDescripcion.TabIndex = 3;
+            txtDescripcion.Location = new Point(120, 110);
+            txtDescripcion.Multiline = true;
+            txtDescripcion.Name = "txtDescripcion";
+            txtDescripcion.Size = new Size(200, 60);
+            txtDescripcion.TabIndex = 3;
             // 
             // txtPrecio
             // 
-            this.txtPrecio.Location = new Point(120, 190);
-            this.txtPrecio.Name = "txtPrecio";
-            this.txtPrecio.Size = new Size(200, 23);
-            this.txtPrecio.TabIndex = 4;
+            txtPrecio.Location = new Point(120, 190);
+            txtPrecio.Name = "txtPrecio";
+            txtPrecio.Size = new Size(200, 23);
+            txtPrecio.TabIndex = 4;
             // 
             // txtStock
             // 
-            this.txtStock.Location = new Point(120, 230);
-            this.txtStock.Name = "txtStock";
-            this.txtStock.Size = new Size(200, 23);
-            this.txtStock.TabIndex = 5;
+            txtStock.Location = new Point(120, 230);
+            txtStock.Name = "txtStock";
+            txtStock.Size = new Size(200, 23);
+            txtStock.TabIndex = 5;
             // 
             // cmbCategoria
             // 
-            this.cmbCategoria.DropDownStyle = ComboBoxStyle.DropDownList;
-            this.cmbCategoria.FormattingEnabled = true;
-            this.cmbCategoria.Location = new Point(450, 30);
-            this.cmbCategoria.Name = "cmbCategoria";
-            this.cmbCategoria.Size = new Size(200, 23);
-            this.cmbCategoria.TabIndex = 6;
+            cmbCategoria.DropDownStyle = ComboBoxStyle.DropDownList;
+            cmbCategoria.FormattingEnabled = true;
+            cmbCategoria.Location = new Point(450, 30);
+            cmbCategoria.Name = "cmbCategoria";
+            cmbCategoria.Size = new Size(200, 23);
+            cmbCategoria.TabIndex = 6;
             // 
             // cmbSucursal
             // 
-            this.cmbSucursal.DropDownStyle = ComboBoxStyle.DropDownList;
-            this.cmbSucursal.FormattingEnabled = true;
-            this.cmbSucursal.Location = new Point(450, 70);
-            this.cmbSucursal.Name = "cmbSucursal";
-            this.cmbSucursal.Size = new Size(200, 23);
-            this.cmbSucursal.TabIndex = 7;
+            cmbSucursal.DropDownStyle = ComboBoxStyle.DropDownList;
+            cmbSucursal.FormattingEnabled = true;
+            cmbSucursal.Location = new Point(450, 70);
+            cmbSucursal.Name = "cmbSucursal";
+            cmbSucursal.Size = new Size(200, 23);
+            cmbSucursal.TabIndex = 7;
             // 
             // btnNuevo
             // 
-            this.btnNuevo.Location = new Point(450, 120);
-            this.btnNuevo.Name = "btnNuevo";
-            this.btnNuevo.Size = new Size(90, 30);
-            this.btnNuevo.TabIndex = 8;
-            this.btnNuevo.Text = "Nuevo";
-            this.btnNuevo.UseVisualStyleBackColor = true;
-            this.btnNuevo.Click += new EventHandler(this.btnNuevo_Click);
+            btnNuevo.Location = new Point(450, 120);
+            btnNuevo.Name = "btnNuevo";
+            btnNuevo.Size = new Size(90, 30);
+            btnNuevo.TabIndex = 8;
+            btnNuevo.Text = "Nuevo";
+            btnNuevo.UseVisualStyleBackColor = true;
+            btnNuevo.Click += btnNuevo_Click;
             // 
             // btnGuardar
             // 
-            this.btnGuardar.Location = new Point(550, 120);
-            this.btnGuardar.Name = "btnGuardar";
-            this.btnGuardar.Size = new Size(90, 30);
-            this.btnGuardar.TabIndex = 9;
-            this.btnGuardar.Text = "Guardar";
-            this.btnGuardar.UseVisualStyleBackColor = true;
-            this.btnGuardar.Click += new EventHandler(this.btnGuardar_Click);
+            btnGuardar.Location = new Point(550, 120);
+            btnGuardar.Name = "btnGuardar";
+            btnGuardar.Size = new Size(90, 30);
+            btnGuardar.TabIndex = 9;
+            btnGuardar.Text = "Guardar";
+            btnGuardar.UseVisualStyleBackColor = true;
+            btnGuardar.Click += btnGuardar_Click;
             // 
             // btnActualizar
             // 
-            this.btnActualizar.Enabled = false;
-            this.btnActualizar.Location = new Point(450, 160);
-            this.btnActualizar.Name = "btnActualizar";
-            this.btnActualizar.Size = new Size(90, 30);
-            this.btnActualizar.TabIndex = 10;
-            this.btnActualizar.Text = "Actualizar";
-            this.btnActualizar.UseVisualStyleBackColor = true;
-            this.btnActualizar.Click += new EventHandler(this.btnActualizar_Click);
+            btnActualizar.Enabled = false;
+            btnActualizar.Location = new Point(450, 160);
+            btnActualizar.Name = "btnActualizar";
+            btnActualizar.Size = new Size(90, 30);
+            btnActualizar.TabIndex = 10;
+            btnActualizar.Text = "Actualizar";
+            btnActualizar.UseVisualStyleBackColor = true;
+            btnActualizar.Click += btnActualizar_Click;
             // 
             // btnEliminar
             // 
-            this.btnEliminar.Enabled = false;
-            this.btnEliminar.Location = new Point(550, 160);
-            this.btnEliminar.Name = "btnEliminar";
-            this.btnEliminar.Size = new Size(90, 30);
-            this.btnEliminar.TabIndex = 11;
-            this.btnEliminar.Text = "Eliminar";
-            this.btnEliminar.UseVisualStyleBackColor = true;
-            this.btnEliminar.Click += new EventHandler(this.btnEliminar_Click);
+            btnEliminar.Enabled = false;
+            btnEliminar.Location = new Point(550, 160);
+            btnEliminar.Name = "btnEliminar";
+            btnEliminar.Size = new Size(90, 30);
+            btnEliminar.TabIndex = 11;
+            btnEliminar.Text = "Eliminar";
+            btnEliminar.UseVisualStyleBackColor = true;
+            btnEliminar.Click += btnEliminar_Click;
             // 
             // lblCodigo
             // 
-            this.lblCodigo.AutoSize = true;
-            this.lblCodigo.Location = new Point(20, 33);
-            this.lblCodigo.Name = "lblCodigo";
-            this.lblCodigo.Size = new Size(46, 15);
-            this.lblCodigo.TabIndex = 12;
-            this.lblCodigo.Text = "Código:";
+            lblCodigo.AutoSize = true;
+            lblCodigo.Location = new Point(20, 33);
+            lblCodigo.Name = "lblCodigo";
+            lblCodigo.Size = new Size(49, 15);
+            lblCodigo.TabIndex = 12;
+            lblCodigo.Text = "Código:";
             // 
             // lblNombre
             // 
-            this.lblNombre.AutoSize = true;
-            this.lblNombre.Location = new Point(20, 73);
-            this.lblNombre.Name = "lblNombre";
-            this.lblNombre.Size = new Size(54, 15);
-            this.lblNombre.TabIndex = 13;
-            this.lblNombre.Text = "Nombre:";
+            lblNombre.AutoSize = true;
+            lblNombre.Location = new Point(20, 73);
+            lblNombre.Name = "lblNombre";
+            lblNombre.Size = new Size(54, 15);
+            lblNombre.TabIndex = 13;
+            lblNombre.Text = "Nombre:";
             // 
             // lblDescripcion
             // 
-            this.lblDescripcion.AutoSize = true;
-            this.lblDescripcion.Location = new Point(20, 113);
-            this.lblDescripcion.Name = "lblDescripcion";
-            this.lblDescripcion.Size = new Size(70, 15);
-            this.lblDescripcion.TabIndex = 14;
-            this.lblDescripcion.Text = "Descripción:";
+            lblDescripcion.AutoSize = true;
+            lblDescripcion.Location = new Point(20, 113);
+            lblDescripcion.Name = "lblDescripcion";
+            lblDescripcion.Size = new Size(72, 15);
+            lblDescripcion.TabIndex = 14;
+            lblDescripcion.Text = "Descripción:";
             // 
             // lblPrecio
             // 
-            this.lblPrecio.AutoSize = true;
-            this.lblPrecio.Location = new Point(20, 193);
-            this.lblPrecio.Name = "lblPrecio";
-            this.lblPrecio.Size = new Size(43, 15);
-            this.lblPrecio.TabIndex = 15;
-            this.lblPrecio.Text = "Precio:";
+            lblPrecio.AutoSize = true;
+            lblPrecio.Location = new Point(20, 193);
+            lblPrecio.Name = "lblPrecio";
+            lblPrecio.Size = new Size(43, 15);
+            lblPrecio.TabIndex = 15;
+            lblPrecio.Text = "Precio:";
             // 
             // lblStock
             // 
-            this.lblStock.AutoSize = true;
-            this.lblStock.Location = new Point(20, 233);
-            this.lblStock.Name = "lblStock";
-            this.lblStock.Size = new Size(39, 15);
-            this.lblStock.TabIndex = 16;
-            this.lblStock.Text = "Stock:";
+            lblStock.AutoSize = true;
+            lblStock.Location = new Point(20, 233);
+            lblStock.Name = "lblStock";
+            lblStock.Size = new Size(39, 15);
+            lblStock.TabIndex = 16;
+            lblStock.Text = "Stock:";
             // 
             // lblCategoria
             // 
-            this.lblCategoria.AutoSize = true;
-            this.lblCategoria.Location = new Point(350, 33);
-            this.lblCategoria.Name = "lblCategoria";
-            this.lblCategoria.Size = new Size(61, 15);
-            this.lblCategoria.TabIndex = 17;
-            this.lblCategoria.Text = "Categoría:";
+            lblCategoria.AutoSize = true;
+            lblCategoria.Location = new Point(350, 33);
+            lblCategoria.Name = "lblCategoria";
+            lblCategoria.Size = new Size(61, 15);
+            lblCategoria.TabIndex = 17;
+            lblCategoria.Text = "Categoría:";
             // 
             // lblSucursal
             // 
-            this.lblSucursal.AutoSize = true;
-            this.lblSucursal.Location = new Point(350, 73);
-            this.lblSucursal.Name = "lblSucursal";
-            this.lblSucursal.Size = new Size(57, 15);
-            this.lblSucursal.TabIndex = 18;
-            this.lblSucursal.Text = "Sucursal:";
+            lblSucursal.AutoSize = true;
+            lblSucursal.Location = new Point(350, 73);
+            lblSucursal.Name = "lblSucursal";
+            lblSucursal.Size = new Size(54, 15);
+            lblSucursal.TabIndex = 18;
+            lblSucursal.Text = "Sucursal:";
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.lblCodigo);
-            this.groupBox1.Controls.Add(this.lblSucursal);
-            this.groupBox1.Controls.Add(this.txtCodigo);
-            this.groupBox1.Controls.Add(this.lblCategoria);
-            this.groupBox1.Controls.Add(this.txtNombre);
-            this.groupBox1.Controls.Add(this.lblStock);
-            this.groupBox1.Controls.Add(this.txtDescripcion);
-            this.groupBox1.Controls.Add(this.lblPrecio);
-            this.groupBox1.Controls.Add(this.txtPrecio);
-            this.groupBox1.Controls.Add(this.lblDescripcion);
-            this.groupBox1.Controls.Add(this.txtStock);
-            this.groupBox1.Controls.Add(this.lblNombre);
-            this.groupBox1.Controls.Add(this.cmbCategoria);
-            this.groupBox1.Controls.Add(this.cmbSucursal);
-            this.groupBox1.Controls.Add(this.btnNuevo);
-            this.groupBox1.Controls.Add(this.btnGuardar);
-            this.groupBox1.Controls.Add(this.btnActualizar);
-            this.groupBox1.Controls.Add(this.btnEliminar);
-            this.groupBox1.Location = new Point(20, 20);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new Size(680, 270);
-            this.groupBox1.TabIndex = 19;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Datos del Producto";
+            groupBox1.Controls.Add(lblCodigo);
+            groupBox1.Controls.Add(lblSucursal);
+            groupBox1.Controls.Add(txtCodigo);
+            groupBox1.Controls.Add(lblCategoria);
+            groupBox1.Controls.Add(txtNombre);
+            groupBox1.Controls.Add(lblStock);
+            groupBox1.Controls.Add(txtDescripcion);
+            groupBox1.Controls.Add(lblPrecio);
+            groupBox1.Controls.Add(txtPrecio);
+            groupBox1.Controls.Add(lblDescripcion);
+            groupBox1.Controls.Add(txtStock);
+            groupBox1.Controls.Add(lblNombre);
+            groupBox1.Controls.Add(cmbCategoria);
+            groupBox1.Controls.Add(cmbSucursal);
+            groupBox1.Controls.Add(btnNuevo);
+            groupBox1.Controls.Add(btnGuardar);
+            groupBox1.Controls.Add(btnActualizar);
+            groupBox1.Controls.Add(btnEliminar);
+            groupBox1.Location = new Point(20, 20);
+            groupBox1.Name = "groupBox1";
+            groupBox1.Size = new Size(680, 274);
+            groupBox1.TabIndex = 19;
+            groupBox1.TabStop = false;
+            groupBox1.Text = "Datos del Producto";
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.btnConsultar);
-            this.groupBox2.Controls.Add(this.txtNombreConsulta);
-            this.groupBox2.Controls.Add(this.cmbSucursalConsulta);
-            this.groupBox2.Controls.Add(this.lblSucursalConsulta);
-            this.groupBox2.Controls.Add(this.lblNombreConsulta);
-            this.groupBox2.Location = new Point(720, 20);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new Size(200, 270);
-            this.groupBox2.TabIndex = 20;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Consultar Disponibilidad";
+            groupBox2.Controls.Add(btnConsultar);
+            groupBox2.Controls.Add(txtNombreConsulta);
+            groupBox2.Controls.Add(cmbSucursalConsulta);
+            groupBox2.Controls.Add(lblSucursalConsulta);
+            groupBox2.Controls.Add(lblNombreConsulta);
+            groupBox2.Location = new Point(720, 20);
+            groupBox2.Name = "groupBox2";
+            groupBox2.Size = new Size(200, 270);
+            groupBox2.TabIndex = 20;
+            groupBox2.TabStop = false;
+            groupBox2.Text = "Consultar Disponibilidad";
             // 
             // btnConsultar
             // 
-            this.btnConsultar.Location = new Point(20, 120);
-            this.btnConsultar.Name = "btnConsultar";
-            this.btnConsultar.Size = new Size(160, 30);
-            this.btnConsultar.TabIndex = 4;
-            this.btnConsultar.Text = "Consultar";
-            this.btnConsultar.UseVisualStyleBackColor = true;
-            this.btnConsultar.Click += new EventHandler(this.btnConsultar_Click);
+            btnConsultar.Location = new Point(20, 120);
+            btnConsultar.Name = "btnConsultar";
+            btnConsultar.Size = new Size(160, 30);
+            btnConsultar.TabIndex = 4;
+            btnConsultar.Text = "Consultar";
+            btnConsultar.UseVisualStyleBackColor = true;
+            btnConsultar.Click += btnConsultar_Click;
             // 
             // txtNombreConsulta
             // 
-            this.txtNombreConsulta.Location = new Point(20, 80);
-            this.txtNombreConsulta.Name = "txtNombreConsulta";
-            this.txtNombreConsulta.Size = new Size(160, 23);
-            this.txtNombreConsulta.TabIndex = 3;
+            txtNombreConsulta.Location = new Point(20, 91);
+            txtNombreConsulta.Name = "txtNombreConsulta";
+            txtNombreConsulta.Size = new Size(160, 23);
+            txtNombreConsulta.TabIndex = 3;
             // 
             // cmbSucursalConsulta
             // 
-            this.cmbSucursalConsulta.DropDownStyle = ComboBoxStyle.DropDownList;
-            this.cmbSucursalConsulta.FormattingEnabled = true;
-            this.cmbSucursalConsulta.Location = new Point(20, 40);
-            this.cmbSucursalConsulta.Name = "cmbSucursalConsulta";
-            this.cmbSucursalConsulta.Size = new Size(160, 23);
-            this.cmbSucursalConsulta.TabIndex = 2;
+            cmbSucursalConsulta.DropDownStyle = ComboBoxStyle.DropDownList;
+            cmbSucursalConsulta.FormattingEnabled = true;
+            cmbSucursalConsulta.Location = new Point(20, 40);
+            cmbSucursalConsulta.Name = "cmbSucursalConsulta";
+            cmbSucursalConsulta.Size = new Size(160, 23);
+            cmbSucursalConsulta.TabIndex = 2;
             // 
             // lblSucursalConsulta
             // 
-            this.lblSucursalConsulta.AutoSize = true;
-            this.lblSucursalConsulta.Location = new Point(20, 20);
-            this.lblSucursalConsulta.Name = "lblSucursalConsulta";
-            this.lblSucursalConsulta.Size = new Size(57, 15);
-            this.lblSucursalConsulta.TabIndex = 1;
-            this.lblSucursalConsulta.Text = "Sucursal:";
+            lblSucursalConsulta.AutoSize = true;
+            lblSucursalConsulta.Location = new Point(20, 20);
+            lblSucursalConsulta.Name = "lblSucursalConsulta";
+            lblSucursalConsulta.Size = new Size(54, 15);
+            lblSucursalConsulta.TabIndex = 1;
+            lblSucursalConsulta.Text = "Sucursal:";
             // 
             // lblNombreConsulta
             // 
-            this.lblNombreConsulta.AutoSize = true;
-            this.lblNombreConsulta.Location = new Point(20, 60);
-            this.lblNombreConsulta.Name = "lblNombreConsulta";
-            this.lblNombreConsulta.Size = new Size(54, 15);
-            this.lblNombreConsulta.TabIndex = 0;
-            this.lblNombreConsulta.Text = "Nombre:";
+            lblNombreConsulta.AutoSize = true;
+            lblNombreConsulta.Location = new Point(20, 71);
+            lblNombreConsulta.Name = "lblNombreConsulta";
+            lblNombreConsulta.Size = new Size(54, 15);
+            lblNombreConsulta.TabIndex = 0;
+            lblNombreConsulta.Text = "Nombre:";
             // 
             // FormGestionProductos
             // 
-            this.AutoScaleDimensions = new SizeF(7F, 15F);
-            this.AutoScaleMode = AutoScaleMode.Font;
-            this.ClientSize = new Size(940, 620);
-            this.Controls.Add(this.groupBox2);
-            this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.dgvProductos);
-            this.FormBorderStyle = FormBorderStyle.FixedSingle;
-            this.MaximizeBox = false;
-            this.Name = "FormGestionProductos";
-            this.StartPosition = FormStartPosition.CenterScreen;
-            this.Text = "Gestión de Productos";
-            ((System.ComponentModel.ISupportInitialize)(this.dgvProductos)).EndInit();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
-            this.ResumeLayout(false);
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(940, 620);
+            Controls.Add(groupBox2);
+            Controls.Add(groupBox1);
+            Controls.Add(dgvProductos);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
+            MaximizeBox = false;
+            Name = "FormGestionProductos";
+            StartPosition = FormStartPosition.CenterScreen;
+            Text = "Gestión de Productos";
+            ((System.ComponentModel.ISupportInitialize)dgvProductos).EndInit();
+            groupBox1.ResumeLayout(false);
+            groupBox1.PerformLayout();
+            groupBox2.ResumeLayout(false);
+            groupBox2.PerformLayout();
+            ResumeLayout(false);
         }
 
         private DataGridView dgvProductos;

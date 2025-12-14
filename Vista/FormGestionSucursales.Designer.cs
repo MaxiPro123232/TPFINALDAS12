@@ -15,147 +15,147 @@ namespace TechStore.Vistas
 
         private void InitializeComponent()
         {
-            this.dgvSucursales = new DataGridView();
-            this.txtNombre = new TextBox();
-            this.txtDireccion = new TextBox();
-            this.txtTelefono = new TextBox();
-            this.btnNuevo = new Button();
-            this.btnGuardar = new Button();
-            this.btnActualizar = new Button();
-            this.lblNombre = new Label();
-            this.lblDireccion = new Label();
-            this.lblTelefono = new Label();
-            this.groupBox1 = new GroupBox();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvSucursales)).BeginInit();
-            this.groupBox1.SuspendLayout();
-            this.SuspendLayout();
+            dgvSucursales = new DataGridView();
+            txtNombre = new TextBox();
+            txtDireccion = new TextBox();
+            txtTelefono = new TextBox();
+            btnNuevo = new Button();
+            btnGuardar = new Button();
+            btnActualizar = new Button();
+            lblNombre = new Label();
+            lblDireccion = new Label();
+            lblTelefono = new Label();
+            groupBox1 = new GroupBox();
+            ((System.ComponentModel.ISupportInitialize)dgvSucursales).BeginInit();
+            groupBox1.SuspendLayout();
+            SuspendLayout();
             // 
             // dgvSucursales
             // 
-            this.dgvSucursales.AllowUserToAddRows = false;
-            this.dgvSucursales.AllowUserToDeleteRows = false;
-            this.dgvSucursales.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvSucursales.Location = new Point(20, 180);
-            this.dgvSucursales.Name = "dgvSucursales";
-            this.dgvSucursales.ReadOnly = true;
-            this.dgvSucursales.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            this.dgvSucursales.Size = new Size(600, 300);
-            this.dgvSucursales.TabIndex = 0;
-            this.dgvSucursales.SelectionChanged += new EventHandler(this.dgvSucursales_SelectionChanged);
+            dgvSucursales.AllowUserToAddRows = false;
+            dgvSucursales.AllowUserToDeleteRows = false;
+            dgvSucursales.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvSucursales.Location = new Point(20, 213);
+            dgvSucursales.Name = "dgvSucursales";
+            dgvSucursales.ReadOnly = true;
+            dgvSucursales.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgvSucursales.Size = new Size(600, 300);
+            dgvSucursales.TabIndex = 0;
+            dgvSucursales.SelectionChanged += dgvSucursales_SelectionChanged;
             // 
             // txtNombre
             // 
-            this.txtNombre.Location = new Point(120, 30);
-            this.txtNombre.Name = "txtNombre";
-            this.txtNombre.Size = new Size(400, 23);
-            this.txtNombre.TabIndex = 1;
+            txtNombre.Location = new Point(120, 30);
+            txtNombre.Name = "txtNombre";
+            txtNombre.Size = new Size(400, 23);
+            txtNombre.TabIndex = 1;
             // 
             // txtDireccion
             // 
-            this.txtDireccion.Location = new Point(120, 70);
-            this.txtDireccion.Name = "txtDireccion";
-            this.txtDireccion.Size = new Size(400, 23);
-            this.txtDireccion.TabIndex = 2;
+            txtDireccion.Location = new Point(120, 70);
+            txtDireccion.Name = "txtDireccion";
+            txtDireccion.Size = new Size(400, 23);
+            txtDireccion.TabIndex = 2;
             // 
             // txtTelefono
             // 
-            this.txtTelefono.Location = new Point(120, 110);
-            this.txtTelefono.Name = "txtTelefono";
-            this.txtTelefono.Size = new Size(400, 23);
-            this.txtTelefono.TabIndex = 3;
+            txtTelefono.Location = new Point(120, 110);
+            txtTelefono.Name = "txtTelefono";
+            txtTelefono.Size = new Size(400, 23);
+            txtTelefono.TabIndex = 3;
             // 
             // btnNuevo
             // 
-            this.btnNuevo.Location = new Point(120, 150);
-            this.btnNuevo.Name = "btnNuevo";
-            this.btnNuevo.Size = new Size(90, 30);
-            this.btnNuevo.TabIndex = 4;
-            this.btnNuevo.Text = "Nuevo";
-            this.btnNuevo.UseVisualStyleBackColor = true;
-            this.btnNuevo.Click += new EventHandler(this.btnNuevo_Click);
+            btnNuevo.Location = new Point(120, 150);
+            btnNuevo.Name = "btnNuevo";
+            btnNuevo.Size = new Size(90, 30);
+            btnNuevo.TabIndex = 4;
+            btnNuevo.Text = "Nuevo";
+            btnNuevo.UseVisualStyleBackColor = true;
+            btnNuevo.Click += btnNuevo_Click;
             // 
             // btnGuardar
             // 
-            this.btnGuardar.Location = new Point(220, 150);
-            this.btnGuardar.Name = "btnGuardar";
-            this.btnGuardar.Size = new Size(90, 30);
-            this.btnGuardar.TabIndex = 5;
-            this.btnGuardar.Text = "Guardar";
-            this.btnGuardar.UseVisualStyleBackColor = true;
-            this.btnGuardar.Click += new EventHandler(this.btnGuardar_Click);
+            btnGuardar.Location = new Point(220, 150);
+            btnGuardar.Name = "btnGuardar";
+            btnGuardar.Size = new Size(90, 30);
+            btnGuardar.TabIndex = 5;
+            btnGuardar.Text = "Guardar";
+            btnGuardar.UseVisualStyleBackColor = true;
+            btnGuardar.Click += btnGuardar_Click;
             // 
             // btnActualizar
             // 
-            this.btnActualizar.Enabled = false;
-            this.btnActualizar.Location = new Point(320, 150);
-            this.btnActualizar.Name = "btnActualizar";
-            this.btnActualizar.Size = new Size(90, 30);
-            this.btnActualizar.TabIndex = 6;
-            this.btnActualizar.Text = "Actualizar";
-            this.btnActualizar.UseVisualStyleBackColor = true;
-            this.btnActualizar.Click += new EventHandler(this.btnActualizar_Click);
+            btnActualizar.Enabled = false;
+            btnActualizar.Location = new Point(320, 150);
+            btnActualizar.Name = "btnActualizar";
+            btnActualizar.Size = new Size(90, 30);
+            btnActualizar.TabIndex = 6;
+            btnActualizar.Text = "Actualizar";
+            btnActualizar.UseVisualStyleBackColor = true;
+            btnActualizar.Click += btnActualizar_Click;
             // 
             // lblNombre
             // 
-            this.lblNombre.AutoSize = true;
-            this.lblNombre.Location = new Point(20, 33);
-            this.lblNombre.Name = "lblNombre";
-            this.lblNombre.Size = new Size(54, 15);
-            this.lblNombre.TabIndex = 7;
-            this.lblNombre.Text = "Nombre:";
+            lblNombre.AutoSize = true;
+            lblNombre.Location = new Point(20, 33);
+            lblNombre.Name = "lblNombre";
+            lblNombre.Size = new Size(54, 15);
+            lblNombre.TabIndex = 7;
+            lblNombre.Text = "Nombre:";
             // 
             // lblDireccion
             // 
-            this.lblDireccion.AutoSize = true;
-            this.lblDireccion.Location = new Point(20, 73);
-            this.lblDireccion.Name = "lblDireccion";
-            this.lblDireccion.Size = new Size(60, 15);
-            this.lblDireccion.TabIndex = 8;
-            this.lblDireccion.Text = "Dirección:";
+            lblDireccion.AutoSize = true;
+            lblDireccion.Location = new Point(20, 73);
+            lblDireccion.Name = "lblDireccion";
+            lblDireccion.Size = new Size(60, 15);
+            lblDireccion.TabIndex = 8;
+            lblDireccion.Text = "Dirección:";
             // 
             // lblTelefono
             // 
-            this.lblTelefono.AutoSize = true;
-            this.lblTelefono.Location = new Point(20, 113);
-            this.lblTelefono.Name = "lblTelefono";
-            this.lblTelefono.Size = new Size(55, 15);
-            this.lblTelefono.TabIndex = 9;
-            this.lblTelefono.Text = "Teléfono:";
+            lblTelefono.AutoSize = true;
+            lblTelefono.Location = new Point(20, 113);
+            lblTelefono.Name = "lblTelefono";
+            lblTelefono.Size = new Size(56, 15);
+            lblTelefono.TabIndex = 9;
+            lblTelefono.Text = "Teléfono:";
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.lblNombre);
-            this.groupBox1.Controls.Add(this.txtNombre);
-            this.groupBox1.Controls.Add(this.lblDireccion);
-            this.groupBox1.Controls.Add(this.txtDireccion);
-            this.groupBox1.Controls.Add(this.lblTelefono);
-            this.groupBox1.Controls.Add(this.txtTelefono);
-            this.groupBox1.Controls.Add(this.btnNuevo);
-            this.groupBox1.Controls.Add(this.btnGuardar);
-            this.groupBox1.Controls.Add(this.btnActualizar);
-            this.groupBox1.Location = new Point(20, 20);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new Size(600, 150);
-            this.groupBox1.TabIndex = 10;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Datos de la Sucursal";
+            groupBox1.Controls.Add(lblNombre);
+            groupBox1.Controls.Add(txtNombre);
+            groupBox1.Controls.Add(lblDireccion);
+            groupBox1.Controls.Add(txtDireccion);
+            groupBox1.Controls.Add(lblTelefono);
+            groupBox1.Controls.Add(txtTelefono);
+            groupBox1.Controls.Add(btnNuevo);
+            groupBox1.Controls.Add(btnGuardar);
+            groupBox1.Controls.Add(btnActualizar);
+            groupBox1.Location = new Point(20, 20);
+            groupBox1.Name = "groupBox1";
+            groupBox1.Size = new Size(600, 187);
+            groupBox1.TabIndex = 10;
+            groupBox1.TabStop = false;
+            groupBox1.Text = "Datos de la Sucursal";
             // 
             // FormGestionSucursales
             // 
-            this.AutoScaleDimensions = new SizeF(7F, 15F);
-            this.AutoScaleMode = AutoScaleMode.Font;
-            this.ClientSize = new Size(640, 500);
-            this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.dgvSucursales);
-            this.FormBorderStyle = FormBorderStyle.FixedSingle;
-            this.MaximizeBox = false;
-            this.Name = "FormGestionSucursales";
-            this.StartPosition = FormStartPosition.CenterScreen;
-            this.Text = "Gestión de Sucursales";
-            ((System.ComponentModel.ISupportInitialize)(this.dgvSucursales)).EndInit();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
-            this.ResumeLayout(false);
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(640, 545);
+            Controls.Add(groupBox1);
+            Controls.Add(dgvSucursales);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
+            MaximizeBox = false;
+            Name = "FormGestionSucursales";
+            StartPosition = FormStartPosition.CenterScreen;
+            Text = "Gestión de Sucursales";
+            ((System.ComponentModel.ISupportInitialize)dgvSucursales).EndInit();
+            groupBox1.ResumeLayout(false);
+            groupBox1.PerformLayout();
+            ResumeLayout(false);
         }
 
         private DataGridView dgvSucursales;
