@@ -26,14 +26,17 @@ namespace TechStore.Vistas
 
         private void CargarCombos()
         {
+            cmbCategoria.DataSource = null;
             cmbCategoria.DataSource = _categoriaController.ObtenerTodas();
             cmbCategoria.DisplayMember = "Nombre";
             cmbCategoria.ValueMember = "Id";
 
+            cmbSucursal.DataSource = null;
             cmbSucursal.DataSource = _sucursalController.ObtenerTodas();
             cmbSucursal.DisplayMember = "Nombre";
             cmbSucursal.ValueMember = "Id";
 
+            cmbSucursalConsulta.DataSource = null;
             cmbSucursalConsulta.DataSource = _sucursalController.ObtenerTodas();
             cmbSucursalConsulta.DisplayMember = "Nombre";
             cmbSucursalConsulta.ValueMember = "Id";
@@ -41,6 +44,7 @@ namespace TechStore.Vistas
 
         private void CargarDatos()
         {
+            dgvProductos.DataSource = null;
             dgvProductos.DataSource = _controller.ObtenerTodos();
             LimpiarFormulario();
         }
@@ -167,6 +171,7 @@ namespace TechStore.Vistas
             int sucursalId = (int)cmbSucursalConsulta.SelectedValue;
             string? nombre = string.IsNullOrWhiteSpace(txtNombreConsulta.Text) ? null : txtNombreConsulta.Text.Trim();
 
+            dgvProductos.DataSource = null;
             dgvProductos.DataSource = _controller.ConsultarDisponibilidad(sucursalId, nombre);
         }
 

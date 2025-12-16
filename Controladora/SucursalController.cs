@@ -1,5 +1,6 @@
 using TechStore.Entidades;
 using TechStore.Modelo;
+using Microsoft.EntityFrameworkCore;
 
 namespace TechStore.Controladores
 {
@@ -14,7 +15,7 @@ namespace TechStore.Controladores
 
         public List<Sucursal> ObtenerTodas()
         {
-            return _context.Sucursales.ToList();
+            return _context.Sucursales.AsNoTracking().ToList();
         }
 
         public Sucursal? ObtenerPorId(int id)

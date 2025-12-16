@@ -18,6 +18,7 @@ namespace TechStore.Controladores
             return _context.Productos
                 .Include(p => p.Categoria)
                 .Include(p => p.Sucursal)
+                .AsNoTracking()
                 .ToList();
         }
 
@@ -50,7 +51,7 @@ namespace TechStore.Controladores
                 query = query.Where(p => p.Nombre.Contains(nombre));
             }
 
-            return query.ToList();
+            return query.AsNoTracking().ToList();
         }
 
         public bool Crear(Producto producto)

@@ -27,18 +27,22 @@ namespace TechStore.Vistas
 
         private void CargarCombos()
         {
+            cmbSucursal.DataSource = null;
             cmbSucursal.DataSource = _sucursalController.ObtenerTodas();
             cmbSucursal.DisplayMember = "Nombre";
             cmbSucursal.ValueMember = "Id";
 
+            cmbVendedor.DataSource = null;
             cmbVendedor.DataSource = _vendedorController.ObtenerTodos();
             cmbVendedor.DisplayMember = "Nombre";
             cmbVendedor.ValueMember = "Id";
 
+            cmbProducto.DataSource = null;
             cmbProducto.DataSource = _productoController.ObtenerTodos();
             cmbProducto.DisplayMember = "Nombre";
             cmbProducto.ValueMember = "Id";
 
+            cmbCliente.DataSource = null;
             cmbCliente.DataSource = _clienteController.ObtenerTodos();
             cmbCliente.DisplayMember = "Nombre";
             cmbCliente.ValueMember = "Id";
@@ -56,6 +60,7 @@ namespace TechStore.Vistas
             }
 
             var ventas = _ventaController.ObtenerVentasPorPeriodo(fechaInicio, fechaFin);
+            dgvReportes.DataSource = null;
             dgvReportes.DataSource = ventas.Select(v => new
             {
                 NumeroFactura = v.NumeroFactura,
@@ -84,6 +89,7 @@ namespace TechStore.Vistas
             var ventas = _ventaController.ObtenerVentasPorProducto(productoId);
             var producto = _productoController.ObtenerPorId(productoId);
 
+            dgvReportes.DataSource = null;
             dgvReportes.DataSource = ventas.Select(v => new
             {
                 NumeroFactura = v.NumeroFactura,
@@ -110,6 +116,7 @@ namespace TechStore.Vistas
             var ventas = _ventaController.ObtenerVentasPorSucursal(sucursalId);
             var sucursal = _sucursalController.ObtenerPorId(sucursalId);
 
+            dgvReportes.DataSource = null;
             dgvReportes.DataSource = ventas.Select(v => new
             {
                 NumeroFactura = v.NumeroFactura,
@@ -137,6 +144,7 @@ namespace TechStore.Vistas
             var ventas = _ventaController.ObtenerVentasPorVendedor(vendedorId);
             var vendedor = _vendedorController.ObtenerPorId(vendedorId);
 
+            dgvReportes.DataSource = null;
             dgvReportes.DataSource = ventas.Select(v => new
             {
                 NumeroFactura = v.NumeroFactura,
@@ -155,6 +163,7 @@ namespace TechStore.Vistas
         private void btnProductosMasVendidos_Click(object sender, EventArgs e)
         {
             var productos = _ventaController.ObtenerProductosMasVendidos(10);
+            dgvReportes.DataSource = null;
             dgvReportes.DataSource = productos;
             lblTituloReporte.Text = "Top 10 Productos Más Vendidos";
         }
@@ -171,6 +180,7 @@ namespace TechStore.Vistas
             var cliente = _clienteController.ObtenerPorId(clienteId);
             decimal saldo = _clienteController.ObtenerSaldoCuentaCorriente(clienteId);
 
+            dgvReportes.DataSource = null;
             dgvReportes.DataSource = new[]
             {
                 new

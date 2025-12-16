@@ -20,6 +20,7 @@ namespace TechStore.Vistas
 
         private void CargarDatos()
         {
+            dgvCategorias.DataSource = null;
             dgvCategorias.DataSource = _controller.ObtenerTodas();
             LimpiarFormulario();
         }

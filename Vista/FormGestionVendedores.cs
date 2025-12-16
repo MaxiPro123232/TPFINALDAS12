@@ -23,6 +23,7 @@ namespace TechStore.Vistas
 
         private void CargarCombos()
         {
+            cmbSucursal.DataSource = null;
             cmbSucursal.DataSource = _sucursalController.ObtenerTodas();
             cmbSucursal.DisplayMember = "Nombre";
             cmbSucursal.ValueMember = "Id";
@@ -30,6 +31,7 @@ namespace TechStore.Vistas
 
         private void CargarDatos()
         {
+            dgvVendedores.DataSource = null;
             dgvVendedores.DataSource = _controller.ObtenerTodos();
             LimpiarFormulario();
         }

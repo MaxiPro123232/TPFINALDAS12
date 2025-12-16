@@ -17,6 +17,7 @@ namespace TechStore.Controladores
         {
             return _context.Vendedores
                 .Include(v => v.Sucursal)
+                .AsNoTracking()
                 .ToList();
         }
 

@@ -25,6 +25,7 @@ namespace TechStore.Controladores
                 .Include(v => v.Sucursal)
                 .Include(v => v.DetalleVentas)
                     .ThenInclude(d => d.Producto)
+                .AsNoTracking()
                 .OrderByDescending(v => v.Fecha)
                 .ToList();
         }
@@ -152,6 +153,7 @@ namespace TechStore.Controladores
                 .Include(v => v.DetalleVentas)
                     .ThenInclude(d => d.Producto)
                 .Where(v => v.Fecha >= fechaInicio && v.Fecha <= fechaFin)
+                .AsNoTracking()
                 .OrderByDescending(v => v.Fecha)
                 .ToList();
         }
@@ -165,6 +167,7 @@ namespace TechStore.Controladores
                 .Include(v => v.DetalleVentas)
                     .ThenInclude(d => d.Producto)
                 .Where(v => v.DetalleVentas.Any(d => d.ProductoId == productoId))
+                .AsNoTracking()
                 .OrderByDescending(v => v.Fecha)
                 .ToList();
         }
@@ -178,6 +181,7 @@ namespace TechStore.Controladores
                 .Include(v => v.DetalleVentas)
                     .ThenInclude(d => d.Producto)
                 .Where(v => v.SucursalId == sucursalId)
+                .AsNoTracking()
                 .OrderByDescending(v => v.Fecha)
                 .ToList();
         }
@@ -191,6 +195,7 @@ namespace TechStore.Controladores
                 .Include(v => v.DetalleVentas)
                     .ThenInclude(d => d.Producto)
                 .Where(v => v.VendedorId == vendedorId)
+                .AsNoTracking()
                 .OrderByDescending(v => v.Fecha)
                 .ToList();
         }
@@ -199,6 +204,7 @@ namespace TechStore.Controladores
         {
             return _context.DetalleVentas
                 .Include(d => d.Producto)
+                .AsNoTracking()
                 .GroupBy(d => new { d.ProductoId, d.Producto.Nombre })
                 .Select(g => new
                 {

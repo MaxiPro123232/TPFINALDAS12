@@ -31,18 +31,22 @@ namespace TechStore.Vistas
 
         private void CargarCombos()
         {
+            cmbCliente.DataSource = null;
             cmbCliente.DataSource = _clienteController.ObtenerTodos();
             cmbCliente.DisplayMember = "Nombre";
             cmbCliente.ValueMember = "Id";
 
+            cmbVendedor.DataSource = null;
             cmbVendedor.DataSource = _vendedorController.ObtenerTodos();
             cmbVendedor.DisplayMember = "Nombre";
             cmbVendedor.ValueMember = "Id";
 
+            cmbSucursal.DataSource = null;
             cmbSucursal.DataSource = _sucursalController.ObtenerTodas();
             cmbSucursal.DisplayMember = "Nombre";
             cmbSucursal.ValueMember = "Id";
 
+            cmbProducto.DataSource = null;
             cmbProducto.DataSource = _productoController.ObtenerTodos();
             cmbProducto.DisplayMember = "Nombre";
             cmbProducto.ValueMember = "Id";
