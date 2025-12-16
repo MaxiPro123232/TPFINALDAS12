@@ -27,7 +27,7 @@ namespace TechStore.Vistas
             // 
             // btnProductos
             // 
-            btnProductos.Location = new Point(30, 80);
+            btnProductos.Location = new Point(155, 152);
             btnProductos.Name = "btnProductos";
             btnProductos.Size = new Size(150, 50);
             btnProductos.TabIndex = 0;
@@ -37,7 +37,7 @@ namespace TechStore.Vistas
             // 
             // btnCategorias
             // 
-            btnCategorias.Location = new Point(200, 80);
+            btnCategorias.Location = new Point(194, 80);
             btnCategorias.Name = "btnCategorias";
             btnCategorias.Size = new Size(150, 50);
             btnCategorias.TabIndex = 1;
@@ -47,7 +47,7 @@ namespace TechStore.Vistas
             // 
             // btnClientes
             // 
-            btnClientes.Location = new Point(370, 80);
+            btnClientes.Location = new Point(546, 80);
             btnClientes.Name = "btnClientes";
             btnClientes.Size = new Size(150, 50);
             btnClientes.TabIndex = 2;
@@ -57,7 +57,7 @@ namespace TechStore.Vistas
             // 
             // btnVentas
             // 
-            btnVentas.Location = new Point(540, 80);
+            btnVentas.Location = new Point(386, 152);
             btnVentas.Name = "btnVentas";
             btnVentas.Size = new Size(150, 50);
             btnVentas.TabIndex = 3;
@@ -67,7 +67,7 @@ namespace TechStore.Vistas
             // 
             // btnReportes
             // 
-            btnReportes.Location = new Point(30, 150);
+            btnReportes.Location = new Point(274, 225);
             btnReportes.Name = "btnReportes";
             btnReportes.Size = new Size(150, 50);
             btnReportes.TabIndex = 4;
@@ -77,7 +77,7 @@ namespace TechStore.Vistas
             // 
             // btnSucursales
             // 
-            btnSucursales.Location = new Point(200, 150);
+            btnSucursales.Location = new Point(12, 80);
             btnSucursales.Name = "btnSucursales";
             btnSucursales.Size = new Size(150, 50);
             btnSucursales.TabIndex = 5;
@@ -87,7 +87,7 @@ namespace TechStore.Vistas
             // 
             // btnVendedores
             // 
-            btnVendedores.Location = new Point(370, 150);
+            btnVendedores.Location = new Point(374, 80);
             btnVendedores.Name = "btnVendedores";
             btnVendedores.Size = new Size(150, 50);
             btnVendedores.TabIndex = 6;
@@ -109,7 +109,7 @@ namespace TechStore.Vistas
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(720, 240);
+            ClientSize = new Size(715, 295);
             Controls.Add(lblTitulo);
             Controls.Add(btnVendedores);
             Controls.Add(btnSucursales);
