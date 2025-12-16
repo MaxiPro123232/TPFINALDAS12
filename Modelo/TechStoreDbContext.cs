@@ -17,7 +17,8 @@ namespace TechStore.Modelo
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer("Data Source=MAXOPC\\SQLEXPRESS;Initial Catalog=TECHSTORE;Integrated Security=True;Persist Security Info=False;Pooling=False;Encrypt=False");
+                // Para LocalDB, usa la sintaxis estándar. Si no funciona, prueba con: (localdb)\ProjectsV13
+                optionsBuilder.UseSqlServer("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=TECHSTORE;Integrated Security=True;Persist Security Info=False;Pooling=False;Encrypt=False");
             }
         }
 
