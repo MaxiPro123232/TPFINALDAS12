@@ -57,6 +57,34 @@ namespace TechStore.Controladores
                 return false;
             }
         }
+
+        public bool Eliminar(int id)
+        {
+            try
+            {
+                var sucursal = _context.Sucursales
+                    .Include(s => s.Productos)
+                    .Include(s => s.Ventas)
+                    .FirstOrDefault(s => s.Id == id);
+
+                if (sucursal == null)
+                    return false;
+
+                if (sucursal.Productos.Any())
+                    return false; // No se puede eliminar si tiene productos
+
+                if (sucursal.Ventas.Any())
+                    return false; // No se puede eliminar si tiene ventas
+
+                _context.Sucursales.Remove(sucursal);
+                _context.SaveChanges();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
     }
 }
 

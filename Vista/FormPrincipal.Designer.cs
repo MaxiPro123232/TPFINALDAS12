@@ -23,6 +23,7 @@ namespace TechStore.Vistas
             btnSucursales = new Button();
             btnVendedores = new Button();
             lblTitulo = new Label();
+            btnSalir = new Button();
             SuspendLayout();
             // 
             // btnProductos
@@ -105,11 +106,24 @@ namespace TechStore.Vistas
             lblTitulo.TabIndex = 7;
             lblTitulo.Text = "TechStore S.A. - Sistema de Gestión";
             // 
+            // btnSalir
+            // 
+            btnSalir.BackColor = Color.Red;
+            btnSalir.ForeColor = Color.White;
+            btnSalir.Location = new Point(602, 240);
+            btnSalir.Name = "btnSalir";
+            btnSalir.Size = new Size(94, 35);
+            btnSalir.TabIndex = 8;
+            btnSalir.Text = "Salir";
+            btnSalir.UseVisualStyleBackColor = false;
+            btnSalir.Click += btnSalir_Click;
+            // 
             // FormPrincipal
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(715, 295);
+            Controls.Add(btnSalir);
             Controls.Add(lblTitulo);
             Controls.Add(btnVendedores);
             Controls.Add(btnSucursales);
@@ -135,6 +149,7 @@ namespace TechStore.Vistas
         private Button btnSucursales;
         private Button btnVendedores;
         private Label lblTitulo;
+        private Button btnSalir;
     }
 }
 

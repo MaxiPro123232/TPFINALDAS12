@@ -50,6 +50,11 @@ namespace TechStore.Vistas
             var form = new FormGestionVendedores();
             form.ShowDialog();
         }
+
+        private void btnSalir_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
     }
 }
 

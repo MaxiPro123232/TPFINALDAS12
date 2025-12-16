@@ -32,6 +32,7 @@ namespace TechStore.Vistas
             txtDireccion.Clear();
             txtTelefono.Clear();
             btnActualizar.Enabled = false;
+            btnEliminar.Enabled = false;
             btnNuevo.Enabled = true;
         }
 
@@ -106,6 +107,7 @@ namespace TechStore.Vistas
             {
                 _sucursalSeleccionada = (Sucursal)dgvSucursales.SelectedRows[0].DataBoundItem;
                 btnActualizar.Enabled = true;
+                btnEliminar.Enabled = true;
                 btnNuevo.Enabled = true;
             }
         }
@@ -114,6 +116,25 @@ namespace TechStore.Vistas
         {
             _context?.Dispose();
             base.OnFormClosing(e);
+        }
+
+        private void btnEliminar_Click(object sender, EventArgs e)
+        {
+            if (_sucursalSeleccionada == null)
+                return;
+
+            if (MessageBox.Show("¿Está seguro de eliminar esta sucursal?", "Confirmar", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                if (_controller.Eliminar(_sucursalSeleccionada.Id))
+                {
+                    MessageBox.Show("Sucursal eliminada exitosamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    CargarDatos();
+                }
+                else
+                {
+                    MessageBox.Show("Error al eliminar la sucursal. Verifique que no tenga productos o ventas asociadas.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
         }
     }
 }

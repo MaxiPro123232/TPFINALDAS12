@@ -26,6 +26,7 @@ namespace TechStore.Vistas
             lblDireccion = new Label();
             lblTelefono = new Label();
             groupBox1 = new GroupBox();
+            btnEliminar = new Button();
             ((System.ComponentModel.ISupportInitialize)dgvSucursales).BeginInit();
             groupBox1.SuspendLayout();
             SuspendLayout();
@@ -66,7 +67,7 @@ namespace TechStore.Vistas
             // 
             // btnNuevo
             // 
-            btnNuevo.Location = new Point(120, 150);
+            btnNuevo.Location = new Point(107, 153);
             btnNuevo.Name = "btnNuevo";
             btnNuevo.Size = new Size(90, 30);
             btnNuevo.TabIndex = 4;
@@ -76,7 +77,7 @@ namespace TechStore.Vistas
             // 
             // btnGuardar
             // 
-            btnGuardar.Location = new Point(220, 150);
+            btnGuardar.Location = new Point(207, 153);
             btnGuardar.Name = "btnGuardar";
             btnGuardar.Size = new Size(90, 30);
             btnGuardar.TabIndex = 5;
@@ -87,7 +88,7 @@ namespace TechStore.Vistas
             // btnActualizar
             // 
             btnActualizar.Enabled = false;
-            btnActualizar.Location = new Point(320, 150);
+            btnActualizar.Location = new Point(307, 153);
             btnActualizar.Name = "btnActualizar";
             btnActualizar.Size = new Size(90, 30);
             btnActualizar.TabIndex = 6;
@@ -124,6 +125,7 @@ namespace TechStore.Vistas
             // 
             // groupBox1
             // 
+            groupBox1.Controls.Add(btnEliminar);
             groupBox1.Controls.Add(lblNombre);
             groupBox1.Controls.Add(txtNombre);
             groupBox1.Controls.Add(lblDireccion);
@@ -139,6 +141,16 @@ namespace TechStore.Vistas
             groupBox1.TabIndex = 10;
             groupBox1.TabStop = false;
             groupBox1.Text = "Datos de la Sucursal";
+            // 
+            // btnEliminar
+            // 
+            btnEliminar.Location = new Point(414, 155);
+            btnEliminar.Name = "btnEliminar";
+            btnEliminar.Size = new Size(82, 26);
+            btnEliminar.TabIndex = 10;
+            btnEliminar.Text = "Eliminar";
+            btnEliminar.UseVisualStyleBackColor = true;
+            btnEliminar.Click += btnEliminar_Click;
             // 
             // FormGestionSucursales
             // 
@@ -169,6 +181,7 @@ namespace TechStore.Vistas
         private Label lblDireccion;
         private Label lblTelefono;
         private GroupBox groupBox1;
+        private Button btnEliminar;
     }
 }
 
