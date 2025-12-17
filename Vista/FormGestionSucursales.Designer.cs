@@ -19,8 +19,8 @@ namespace TechStore.Vistas
             txtNombre = new TextBox();
             txtDireccion = new TextBox();
             txtTelefono = new TextBox();
-            btnNuevo = new Button();
-            btnGuardar = new Button();
+            btnLimpiar = new Button();
+            btnCrear = new Button();
             btnActualizar = new Button();
             lblNombre = new Label();
             lblDireccion = new Label();
@@ -65,25 +65,25 @@ namespace TechStore.Vistas
             txtTelefono.Size = new Size(400, 23);
             txtTelefono.TabIndex = 3;
             // 
-            // btnNuevo
+            // btnLimpiar
             // 
-            btnNuevo.Location = new Point(107, 153);
-            btnNuevo.Name = "btnNuevo";
-            btnNuevo.Size = new Size(90, 30);
-            btnNuevo.TabIndex = 4;
-            btnNuevo.Text = "Nuevo";
-            btnNuevo.UseVisualStyleBackColor = true;
-            btnNuevo.Click += btnNuevo_Click;
+            btnLimpiar.Location = new Point(107, 153);
+            btnLimpiar.Name = "btnLimpiar";
+            btnLimpiar.Size = new Size(90, 30);
+            btnLimpiar.TabIndex = 4;
+            btnLimpiar.Text = "Limpiar";
+            btnLimpiar.UseVisualStyleBackColor = true;
+            btnLimpiar.Click += btnLimpiar_Click;
             // 
-            // btnGuardar
+            // btnCrear
             // 
-            btnGuardar.Location = new Point(207, 153);
-            btnGuardar.Name = "btnGuardar";
-            btnGuardar.Size = new Size(90, 30);
-            btnGuardar.TabIndex = 5;
-            btnGuardar.Text = "Guardar";
-            btnGuardar.UseVisualStyleBackColor = true;
-            btnGuardar.Click += btnGuardar_Click;
+            btnCrear.Location = new Point(207, 153);
+            btnCrear.Name = "btnCrear";
+            btnCrear.Size = new Size(90, 30);
+            btnCrear.TabIndex = 5;
+            btnCrear.Text = "Crear";
+            btnCrear.UseVisualStyleBackColor = true;
+            btnCrear.Click += btnCrear_Click;
             // 
             // btnActualizar
             // 
@@ -132,8 +132,8 @@ namespace TechStore.Vistas
             groupBox1.Controls.Add(txtDireccion);
             groupBox1.Controls.Add(lblTelefono);
             groupBox1.Controls.Add(txtTelefono);
-            groupBox1.Controls.Add(btnNuevo);
-            groupBox1.Controls.Add(btnGuardar);
+            groupBox1.Controls.Add(btnLimpiar);
+            groupBox1.Controls.Add(btnCrear);
             groupBox1.Controls.Add(btnActualizar);
             groupBox1.Location = new Point(20, 20);
             groupBox1.Name = "groupBox1";
@@ -174,8 +174,8 @@ namespace TechStore.Vistas
         private TextBox txtNombre;
         private TextBox txtDireccion;
         private TextBox txtTelefono;
-        private Button btnNuevo;
-        private Button btnGuardar;
+        private Button btnLimpiar;
+        private Button btnCrear;
         private Button btnActualizar;
         private Label lblNombre;
         private Label lblDireccion;

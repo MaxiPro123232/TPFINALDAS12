@@ -15,7 +15,10 @@ namespace TechStore.Controladores
 
         public List<Categoria> ObtenerTodas()
         {
-            return _context.Categorias.AsNoTracking().ToList();
+            return _context.Categorias
+                .Include(c => c.Productos)
+                .AsNoTracking()
+                .ToList();
         }
 
         public Categoria? ObtenerPorId(int id)

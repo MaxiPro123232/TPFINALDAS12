@@ -2,6 +2,8 @@ using TechStore.Controladores;
 using TechStore.Entidades;
 using TechStore.Modelo;
 using Microsoft.EntityFrameworkCore;
+using System.Linq;
+using System.Reflection;
 
 namespace TechStore.Vistas
 {
@@ -36,16 +38,35 @@ namespace TechStore.Vistas
             cmbSucursal.DisplayMember = "Nombre";
             cmbSucursal.ValueMember = "Id";
 
+            // Cargar sucursales para consulta con opción "Todas"
             cmbSucursalConsulta.DataSource = null;
-            cmbSucursalConsulta.DataSource = _sucursalController.ObtenerTodas();
+            var sucursales = _sucursalController.ObtenerTodas();
+            var sucursalesConTodas = new List<dynamic>
+            {
+                new { Id = -1, Nombre = "Todas" }
+            };
+            sucursalesConTodas.AddRange(sucursales.Select(s => new { s.Id, s.Nombre } as dynamic));
+            cmbSucursalConsulta.DataSource = sucursalesConTodas;
             cmbSucursalConsulta.DisplayMember = "Nombre";
             cmbSucursalConsulta.ValueMember = "Id";
+            cmbSucursalConsulta.SelectedIndex = 0; // Seleccionar "Todas" por defecto
         }
 
         private void CargarDatos()
         {
             dgvProductos.DataSource = null;
-            dgvProductos.DataSource = _controller.ObtenerTodos();
+            var productos = _controller.ObtenerTodos();
+            dgvProductos.DataSource = productos.Select(p => new
+            {
+                p.Id,
+                p.Codigo,
+                p.Nombre,
+                p.Descripcion,
+                Categoria = p.Categoria?.Nombre ?? "",
+                Precio = p.Precio,
+                Stock = p.Stock,
+                Sucursal = p.Sucursal?.Nombre ?? ""
+            }).ToList();
             LimpiarFormulario();
         }
 
@@ -61,15 +82,15 @@ namespace TechStore.Vistas
             cmbSucursal.SelectedIndex = -1;
             btnActualizar.Enabled = false;
             btnEliminar.Enabled = false;
-            btnNuevo.Enabled = true;
+            btnLimpiar.Enabled = true;
         }
 
-        private void btnNuevo_Click(object sender, EventArgs e)
+        private void btnLimpiar_Click(object sender, EventArgs e)
         {
             LimpiarFormulario();
         }
 
-        private void btnGuardar_Click(object sender, EventArgs e)
+        private void btnCrear_Click(object sender, EventArgs e)
         {
             if (!ValidarDatos())
                 return;
@@ -85,48 +106,52 @@ namespace TechStore.Vistas
                 SucursalId = (int)cmbSucursal.SelectedValue
             };
 
-            if (_productoSeleccionado == null)
+            // Guardar siempre crea nuevo, ignorando cualquier selección
+            if (_controller.Crear(producto))
             {
-                if (_controller.Crear(producto))
-                {
-                    MessageBox.Show("Producto creado exitosamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    CargarDatos();
-                }
-                else
-                {
-                    MessageBox.Show("Error al crear el producto. Verifique que el código no esté duplicado.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
+                MessageBox.Show("Producto creado exitosamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                LimpiarFormulario();
+                CargarDatos();
             }
             else
             {
-                producto.Id = _productoSeleccionado.Id;
-                if (_controller.Actualizar(producto))
-                {
-                    MessageBox.Show("Producto actualizado exitosamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    CargarDatos();
-                }
-                else
-                {
-                    MessageBox.Show("Error al actualizar el producto.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
+                MessageBox.Show("Error al crear el producto. Verifique que el código no esté duplicado.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
         private void btnActualizar_Click(object sender, EventArgs e)
         {
             if (_productoSeleccionado == null)
+            {
+                MessageBox.Show("Seleccione un producto para actualizar.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (!ValidarDatos())
                 return;
 
-            txtCodigo.Text = _productoSeleccionado.Codigo;
-            txtNombre.Text = _productoSeleccionado.Nombre;
-            txtDescripcion.Text = _productoSeleccionado.Descripcion ?? "";
-            txtPrecio.Text = _productoSeleccionado.Precio.ToString();
-            txtStock.Text = _productoSeleccionado.Stock.ToString();
-            cmbCategoria.SelectedValue = _productoSeleccionado.CategoriaId;
-            cmbSucursal.SelectedValue = _productoSeleccionado.SucursalId;
-            btnActualizar.Enabled = false;
-            btnEliminar.Enabled = false;
-            btnNuevo.Enabled = true;
+            var producto = new Producto
+            {
+                Id = _productoSeleccionado.Id,
+                Codigo = txtCodigo.Text.Trim(),
+                Nombre = txtNombre.Text.Trim(),
+                Descripcion = txtDescripcion.Text.Trim(),
+                CategoriaId = (int)cmbCategoria.SelectedValue,
+                Precio = decimal.Parse(txtPrecio.Text),
+                Stock = int.Parse(txtStock.Text),
+                SucursalId = (int)cmbSucursal.SelectedValue
+            };
+
+            if (_controller.Actualizar(producto))
+            {
+                MessageBox.Show("Producto actualizado exitosamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                LimpiarFormulario();
+                CargarDatos();
+            }
+            else
+            {
+                MessageBox.Show("Error al actualizar el producto.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void btnEliminar_Click(object sender, EventArgs e)
@@ -152,11 +177,27 @@ namespace TechStore.Vistas
         {
             if (dgvProductos.SelectedRows.Count > 0)
             {
-                var producto = (Producto)dgvProductos.SelectedRows[0].DataBoundItem;
-                _productoSeleccionado = _controller.ObtenerPorId(producto.Id);
-                btnActualizar.Enabled = true;
-                btnEliminar.Enabled = true;
-                btnNuevo.Enabled = true;
+                // Obtener el ID del objeto anónimo
+                var selectedRow = dgvProductos.SelectedRows[0].DataBoundItem;
+                var idProperty = selectedRow.GetType().GetProperty("Id");
+                if (idProperty != null)
+                {
+                    int productoId = (int)idProperty.GetValue(selectedRow)!;
+                    _productoSeleccionado = _controller.ObtenerPorId(productoId);
+                    if (_productoSeleccionado != null)
+                    {
+                        txtCodigo.Text = _productoSeleccionado.Codigo;
+                        txtNombre.Text = _productoSeleccionado.Nombre;
+                        txtDescripcion.Text = _productoSeleccionado.Descripcion ?? "";
+                        txtPrecio.Text = _productoSeleccionado.Precio.ToString();
+                        txtStock.Text = _productoSeleccionado.Stock.ToString();
+                        cmbCategoria.SelectedValue = _productoSeleccionado.CategoriaId;
+                        cmbSucursal.SelectedValue = _productoSeleccionado.SucursalId;
+                    }
+                    btnActualizar.Enabled = true;
+                    btnEliminar.Enabled = true;
+                    btnLimpiar.Enabled = true;
+                }
             }
         }
 
@@ -168,11 +209,23 @@ namespace TechStore.Vistas
                 return;
             }
 
-            int sucursalId = (int)cmbSucursalConsulta.SelectedValue;
+            int selectedId = (int)cmbSucursalConsulta.SelectedValue;
+            int? sucursalId = selectedId == -1 ? null : selectedId; // -1 significa "Todas"
             string? nombre = string.IsNullOrWhiteSpace(txtNombreConsulta.Text) ? null : txtNombreConsulta.Text.Trim();
 
             dgvProductos.DataSource = null;
-            dgvProductos.DataSource = _controller.ConsultarDisponibilidad(sucursalId, nombre);
+            var productos = _controller.ConsultarDisponibilidad(sucursalId, nombre);
+            dgvProductos.DataSource = productos.Select(p => new
+            {
+                p.Id,
+                p.Codigo,
+                p.Nombre,
+                p.Descripcion,
+                Categoria = p.Categoria?.Nombre ?? "",
+                Precio = p.Precio,
+                Stock = p.Stock,
+                Sucursal = p.Sucursal?.Nombre ?? ""
+            }).ToList();
         }
 
         private bool ValidarDatos()

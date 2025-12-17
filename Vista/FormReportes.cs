@@ -27,25 +27,57 @@ namespace TechStore.Vistas
 
         private void CargarCombos()
         {
+            // Cargar Sucursales con opción "TODOS"
             cmbSucursal.DataSource = null;
-            cmbSucursal.DataSource = _sucursalController.ObtenerTodas();
+            var sucursales = _sucursalController.ObtenerTodas();
+            var sucursalesConTodos = new List<dynamic>
+            {
+                new { Id = -1, Nombre = "TODOS" }
+            };
+            sucursalesConTodos.AddRange(sucursales.Select(s => new { s.Id, s.Nombre } as dynamic));
+            cmbSucursal.DataSource = sucursalesConTodos;
             cmbSucursal.DisplayMember = "Nombre";
             cmbSucursal.ValueMember = "Id";
+            cmbSucursal.SelectedIndex = 0; // Seleccionar "TODOS" por defecto
 
+            // Cargar Vendedores con opción "TODOS"
             cmbVendedor.DataSource = null;
-            cmbVendedor.DataSource = _vendedorController.ObtenerTodos();
+            var vendedores = _vendedorController.ObtenerTodos();
+            var vendedoresConTodos = new List<dynamic>
+            {
+                new { Id = -1, Nombre = "TODOS" }
+            };
+            vendedoresConTodos.AddRange(vendedores.Select(v => new { v.Id, Nombre = v.Nombre } as dynamic));
+            cmbVendedor.DataSource = vendedoresConTodos;
             cmbVendedor.DisplayMember = "Nombre";
             cmbVendedor.ValueMember = "Id";
+            cmbVendedor.SelectedIndex = 0; // Seleccionar "TODOS" por defecto
 
+            // Cargar Productos con opción "TODOS"
             cmbProducto.DataSource = null;
-            cmbProducto.DataSource = _productoController.ObtenerTodos();
+            var productos = _productoController.ObtenerTodos();
+            var productosConTodos = new List<dynamic>
+            {
+                new { Id = -1, Nombre = "TODOS" }
+            };
+            productosConTodos.AddRange(productos.Select(p => new { p.Id, p.Nombre } as dynamic));
+            cmbProducto.DataSource = productosConTodos;
             cmbProducto.DisplayMember = "Nombre";
             cmbProducto.ValueMember = "Id";
+            cmbProducto.SelectedIndex = 0; // Seleccionar "TODOS" por defecto
 
+            // Cargar Clientes con opción "TODOS"
             cmbCliente.DataSource = null;
-            cmbCliente.DataSource = _clienteController.ObtenerTodos();
+            var clientes = _clienteController.ObtenerTodos();
+            var clientesConTodos = new List<dynamic>
+            {
+                new { Id = -1, Nombre = "TODOS" }
+            };
+            clientesConTodos.AddRange(clientes.Select(c => new { c.Id, Nombre = c.Nombre } as dynamic));
+            cmbCliente.DataSource = clientesConTodos;
             cmbCliente.DisplayMember = "Nombre";
             cmbCliente.ValueMember = "Id";
+            cmbCliente.SelectedIndex = 0; // Seleccionar "TODOS" por defecto
         }
 
         private void btnVentasPorPeriodo_Click(object sender, EventArgs e)
@@ -85,23 +117,48 @@ namespace TechStore.Vistas
                 return;
             }
 
-            int productoId = (int)cmbProducto.SelectedValue;
-            var ventas = _ventaController.ObtenerVentasPorProducto(productoId);
-            var producto = _productoController.ObtenerPorId(productoId);
+            int selectedId = (int)cmbProducto.SelectedValue;
+            List<Venta> ventas;
+            string titulo;
 
-            dgvReportes.DataSource = null;
-            dgvReportes.DataSource = ventas.Select(v => new
+            if (selectedId == -1) // TODOS
             {
-                NumeroFactura = v.NumeroFactura,
-                Fecha = v.Fecha,
-                Cliente = v.Cliente.Nombre,
-                Vendedor = v.Vendedor.Nombre,
-                Sucursal = v.Sucursal.Nombre,
-                Cantidad = v.DetalleVentas.First(d => d.ProductoId == productoId).Cantidad,
-                Total = v.DetalleVentas.First(d => d.ProductoId == productoId).Subtotal
-            }).ToList();
+                ventas = _ventaController.ObtenerTodas();
+                titulo = "Ventas de Todos los Productos";
+                dgvReportes.DataSource = null;
+                dgvReportes.DataSource = ventas.Select(v => new
+                {
+                    NumeroFactura = v.NumeroFactura,
+                    Fecha = v.Fecha,
+                    Cliente = v.Cliente.Nombre,
+                    Vendedor = v.Vendedor.Nombre,
+                    Sucursal = v.Sucursal.Nombre,
+                    MetodoPago = v.MetodoPago.ToString(),
+                    Subtotal = v.Subtotal,
+                    Descuento = v.Descuento,
+                    Total = v.Total
+                }).ToList();
+            }
+            else
+            {
+                int productoId = selectedId;
+                ventas = _ventaController.ObtenerVentasPorProducto(productoId);
+                var producto = _productoController.ObtenerPorId(productoId);
+                titulo = $"Ventas del Producto: {producto?.Nombre}";
+                dgvReportes.DataSource = null;
+                dgvReportes.DataSource = ventas.Select(v => new
+                {
+                    NumeroFactura = v.NumeroFactura,
+                    Fecha = v.Fecha,
+                    Cliente = v.Cliente.Nombre,
+                    Vendedor = v.Vendedor.Nombre,
+                    Sucursal = v.Sucursal.Nombre,
+                    Cantidad = v.DetalleVentas.First(d => d.ProductoId == productoId).Cantidad,
+                    Total = v.DetalleVentas.First(d => d.ProductoId == productoId).Subtotal
+                }).ToList();
+            }
 
-            lblTituloReporte.Text = $"Ventas del Producto: {producto?.Nombre}";
+            lblTituloReporte.Text = titulo;
         }
 
         private void btnVentasPorSucursal_Click(object sender, EventArgs e)
@@ -112,9 +169,22 @@ namespace TechStore.Vistas
                 return;
             }
 
-            int sucursalId = (int)cmbSucursal.SelectedValue;
-            var ventas = _ventaController.ObtenerVentasPorSucursal(sucursalId);
-            var sucursal = _sucursalController.ObtenerPorId(sucursalId);
+            int selectedId = (int)cmbSucursal.SelectedValue;
+            List<Venta> ventas;
+            string titulo;
+
+            if (selectedId == -1) // TODOS
+            {
+                ventas = _ventaController.ObtenerTodas();
+                titulo = "Ventas de Todas las Sucursales";
+            }
+            else
+            {
+                int sucursalId = selectedId;
+                ventas = _ventaController.ObtenerVentasPorSucursal(sucursalId);
+                var sucursal = _sucursalController.ObtenerPorId(sucursalId);
+                titulo = $"Ventas de la Sucursal: {sucursal?.Nombre}";
+            }
 
             dgvReportes.DataSource = null;
             dgvReportes.DataSource = ventas.Select(v => new
@@ -129,7 +199,7 @@ namespace TechStore.Vistas
                 Total = v.Total
             }).ToList();
 
-            lblTituloReporte.Text = $"Ventas de la Sucursal: {sucursal?.Nombre}";
+            lblTituloReporte.Text = titulo;
         }
 
         private void btnVentasPorVendedor_Click(object sender, EventArgs e)
@@ -140,9 +210,22 @@ namespace TechStore.Vistas
                 return;
             }
 
-            int vendedorId = (int)cmbVendedor.SelectedValue;
-            var ventas = _ventaController.ObtenerVentasPorVendedor(vendedorId);
-            var vendedor = _vendedorController.ObtenerPorId(vendedorId);
+            int selectedId = (int)cmbVendedor.SelectedValue;
+            List<Venta> ventas;
+            string titulo;
+
+            if (selectedId == -1) // TODOS
+            {
+                ventas = _ventaController.ObtenerTodas();
+                titulo = "Ventas de Todos los Vendedores";
+            }
+            else
+            {
+                int vendedorId = selectedId;
+                ventas = _ventaController.ObtenerVentasPorVendedor(vendedorId);
+                var vendedor = _vendedorController.ObtenerPorId(vendedorId);
+                titulo = $"Ventas del Vendedor: {vendedor?.Nombre}";
+            }
 
             dgvReportes.DataSource = null;
             dgvReportes.DataSource = ventas.Select(v => new
@@ -157,7 +240,7 @@ namespace TechStore.Vistas
                 Total = v.Total
             }).ToList();
 
-            lblTituloReporte.Text = $"Ventas del Vendedor: {vendedor?.Nombre}";
+            lblTituloReporte.Text = titulo;
         }
 
         private void btnProductosMasVendidos_Click(object sender, EventArgs e)
@@ -176,22 +259,40 @@ namespace TechStore.Vistas
                 return;
             }
 
-            int clienteId = (int)cmbCliente.SelectedValue;
-            var cliente = _clienteController.ObtenerPorId(clienteId);
-            decimal saldo = _clienteController.ObtenerSaldoCuentaCorriente(clienteId);
-
-            dgvReportes.DataSource = null;
-            dgvReportes.DataSource = new[]
+            int selectedId = (int)cmbCliente.SelectedValue;
+            
+            if (selectedId == -1) // TODOS
             {
-                new
+                var clientes = _clienteController.ObtenerTodos();
+                dgvReportes.DataSource = null;
+                dgvReportes.DataSource = clientes.Select(c => new
                 {
-                    Cliente = cliente?.Nombre,
-                    TipoCliente = cliente?.TipoCliente.ToString(),
-                    SaldoCuentaCorriente = saldo
-                }
-            }.ToList();
+                    Cliente = c.Nombre,
+                    TipoCliente = c.TipoCliente.ToString(),
+                    SaldoCuentaCorriente = c.SaldoCuentaCorriente
+                }).ToList();
 
-            lblTituloReporte.Text = $"Estado de Cuenta Corriente - {cliente?.Nombre}";
+                lblTituloReporte.Text = "Estado de Cuenta Corriente - Todos los Clientes";
+            }
+            else
+            {
+                int clienteId = selectedId;
+                var cliente = _clienteController.ObtenerPorId(clienteId);
+                decimal saldo = _clienteController.ObtenerSaldoCuentaCorriente(clienteId);
+
+                dgvReportes.DataSource = null;
+                dgvReportes.DataSource = new[]
+                {
+                    new
+                    {
+                        Cliente = cliente?.Nombre,
+                        TipoCliente = cliente?.TipoCliente.ToString(),
+                        SaldoCuentaCorriente = saldo
+                    }
+                }.ToList();
+
+                lblTituloReporte.Text = $"Estado de Cuenta Corriente - {cliente?.Nombre}";
+            }
         }
 
         protected override void OnFormClosing(FormClosingEventArgs e)

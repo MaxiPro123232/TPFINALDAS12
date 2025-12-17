@@ -62,16 +62,16 @@ namespace TechStore.Vistas
             groupBox1.Controls.Add(lblFechaInicio);
             groupBox1.Location = new Point(20, 20);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(900, 215);
+            groupBox1.Size = new Size(1169, 215);
             groupBox1.TabIndex = 0;
             groupBox1.TabStop = false;
             groupBox1.Text = "Filtros y Consultas";
             // 
             // btnCuentaCorriente
             // 
-            btnCuentaCorriente.Location = new Point(750, 150);
+            btnCuentaCorriente.Location = new Point(996, 150);
             btnCuentaCorriente.Name = "btnCuentaCorriente";
-            btnCuentaCorriente.Size = new Size(130, 30);
+            btnCuentaCorriente.Size = new Size(157, 30);
             btnCuentaCorriente.TabIndex = 16;
             btnCuentaCorriente.Text = "Cuenta Corriente";
             btnCuentaCorriente.UseVisualStyleBackColor = true;
@@ -79,9 +79,9 @@ namespace TechStore.Vistas
             // 
             // btnProductosMasVendidos
             // 
-            btnProductosMasVendidos.Location = new Point(600, 150);
+            btnProductosMasVendidos.Location = new Point(818, 150);
             btnProductosMasVendidos.Name = "btnProductosMasVendidos";
-            btnProductosMasVendidos.Size = new Size(130, 30);
+            btnProductosMasVendidos.Size = new Size(154, 30);
             btnProductosMasVendidos.TabIndex = 15;
             btnProductosMasVendidos.Text = "Productos Más Vendidos";
             btnProductosMasVendidos.UseVisualStyleBackColor = true;
@@ -89,9 +89,9 @@ namespace TechStore.Vistas
             // 
             // btnVentasPorVendedor
             // 
-            btnVentasPorVendedor.Location = new Point(450, 150);
+            btnVentasPorVendedor.Location = new Point(643, 150);
             btnVentasPorVendedor.Name = "btnVentasPorVendedor";
-            btnVentasPorVendedor.Size = new Size(130, 30);
+            btnVentasPorVendedor.Size = new Size(157, 30);
             btnVentasPorVendedor.TabIndex = 14;
             btnVentasPorVendedor.Text = "Ventas por Vendedor";
             btnVentasPorVendedor.UseVisualStyleBackColor = true;
@@ -99,18 +99,18 @@ namespace TechStore.Vistas
             // 
             // btnVentasPorSucursal
             // 
-            btnVentasPorSucursal.Location = new Point(300, 150);
+            btnVentasPorSucursal.Location = new Point(480, 150);
             btnVentasPorSucursal.Name = "btnVentasPorSucursal";
-            btnVentasPorSucursal.Size = new Size(130, 30);
+            btnVentasPorSucursal.Size = new Size(141, 30);
             btnVentasPorSucursal.TabIndex = 13;
             btnVentasPorSucursal.Text = "Ventas por Sucursal";
             btnVentasPorSucursal.Click += btnVentasPorSucursal_Click;
             // 
             // btnVentasPorProducto
             // 
-            btnVentasPorProducto.Location = new Point(150, 150);
+            btnVentasPorProducto.Location = new Point(243, 150);
             btnVentasPorProducto.Name = "btnVentasPorProducto";
-            btnVentasPorProducto.Size = new Size(130, 30);
+            btnVentasPorProducto.Size = new Size(215, 30);
             btnVentasPorProducto.TabIndex = 12;
             btnVentasPorProducto.Text = "Ventas por Producto";
             btnVentasPorProducto.UseVisualStyleBackColor = true;
@@ -118,9 +118,9 @@ namespace TechStore.Vistas
             // 
             // btnVentasPorPeriodo
             // 
-            btnVentasPorPeriodo.Location = new Point(20, 150);
+            btnVentasPorPeriodo.Location = new Point(6, 150);
             btnVentasPorPeriodo.Name = "btnVentasPorPeriodo";
-            btnVentasPorPeriodo.Size = new Size(110, 30);
+            btnVentasPorPeriodo.Size = new Size(217, 30);
             btnVentasPorPeriodo.TabIndex = 11;
             btnVentasPorPeriodo.Text = "Ventas por Período";
             btnVentasPorPeriodo.UseVisualStyleBackColor = true;
@@ -130,56 +130,56 @@ namespace TechStore.Vistas
             // 
             cmbCliente.DropDownStyle = ComboBoxStyle.DropDownList;
             cmbCliente.FormattingEnabled = true;
-            cmbCliente.Location = new Point(750, 110);
+            cmbCliente.Location = new Point(996, 110);
             cmbCliente.Name = "cmbCliente";
-            cmbCliente.Size = new Size(130, 23);
+            cmbCliente.Size = new Size(157, 23);
             cmbCliente.TabIndex = 10;
             // 
             // cmbVendedor
             // 
             cmbVendedor.DropDownStyle = ComboBoxStyle.DropDownList;
             cmbVendedor.FormattingEnabled = true;
-            cmbVendedor.Location = new Point(600, 110);
+            cmbVendedor.Location = new Point(818, 108);
             cmbVendedor.Name = "cmbVendedor";
-            cmbVendedor.Size = new Size(130, 23);
+            cmbVendedor.Size = new Size(154, 23);
             cmbVendedor.TabIndex = 9;
             // 
             // cmbSucursal
             // 
             cmbSucursal.DropDownStyle = ComboBoxStyle.DropDownList;
             cmbSucursal.FormattingEnabled = true;
-            cmbSucursal.Location = new Point(450, 110);
+            cmbSucursal.Location = new Point(643, 110);
             cmbSucursal.Name = "cmbSucursal";
-            cmbSucursal.Size = new Size(130, 23);
+            cmbSucursal.Size = new Size(157, 23);
             cmbSucursal.TabIndex = 8;
             // 
             // cmbProducto
             // 
             cmbProducto.DropDownStyle = ComboBoxStyle.DropDownList;
             cmbProducto.FormattingEnabled = true;
-            cmbProducto.Location = new Point(300, 110);
+            cmbProducto.Location = new Point(480, 108);
             cmbProducto.Name = "cmbProducto";
-            cmbProducto.Size = new Size(130, 23);
+            cmbProducto.Size = new Size(141, 23);
             cmbProducto.TabIndex = 7;
             // 
             // dtpFechaFin
             // 
-            dtpFechaFin.Location = new Point(150, 110);
+            dtpFechaFin.Location = new Point(243, 110);
             dtpFechaFin.Name = "dtpFechaFin";
-            dtpFechaFin.Size = new Size(130, 23);
+            dtpFechaFin.Size = new Size(215, 23);
             dtpFechaFin.TabIndex = 6;
             // 
             // dtpFechaInicio
             // 
-            dtpFechaInicio.Location = new Point(20, 110);
+            dtpFechaInicio.Location = new Point(6, 110);
             dtpFechaInicio.Name = "dtpFechaInicio";
-            dtpFechaInicio.Size = new Size(110, 23);
+            dtpFechaInicio.Size = new Size(217, 23);
             dtpFechaInicio.TabIndex = 5;
             // 
             // lblCliente
             // 
             lblCliente.AutoSize = true;
-            lblCliente.Location = new Point(750, 90);
+            lblCliente.Location = new Point(996, 90);
             lblCliente.Name = "lblCliente";
             lblCliente.Size = new Size(47, 15);
             lblCliente.TabIndex = 4;
@@ -188,7 +188,7 @@ namespace TechStore.Vistas
             // lblVendedor
             // 
             lblVendedor.AutoSize = true;
-            lblVendedor.Location = new Point(600, 90);
+            lblVendedor.Location = new Point(818, 90);
             lblVendedor.Name = "lblVendedor";
             lblVendedor.Size = new Size(60, 15);
             lblVendedor.TabIndex = 3;
@@ -197,7 +197,7 @@ namespace TechStore.Vistas
             // lblSucursal
             // 
             lblSucursal.AutoSize = true;
-            lblSucursal.Location = new Point(450, 90);
+            lblSucursal.Location = new Point(643, 90);
             lblSucursal.Name = "lblSucursal";
             lblSucursal.Size = new Size(54, 15);
             lblSucursal.TabIndex = 2;
@@ -206,7 +206,7 @@ namespace TechStore.Vistas
             // lblProducto
             // 
             lblProducto.AutoSize = true;
-            lblProducto.Location = new Point(300, 90);
+            lblProducto.Location = new Point(480, 90);
             lblProducto.Name = "lblProducto";
             lblProducto.Size = new Size(59, 15);
             lblProducto.TabIndex = 1;
@@ -215,7 +215,7 @@ namespace TechStore.Vistas
             // lblFechaFin
             // 
             lblFechaFin.AutoSize = true;
-            lblFechaFin.Location = new Point(150, 90);
+            lblFechaFin.Location = new Point(243, 90);
             lblFechaFin.Name = "lblFechaFin";
             lblFechaFin.Size = new Size(60, 15);
             lblFechaFin.TabIndex = 0;
@@ -224,7 +224,7 @@ namespace TechStore.Vistas
             // lblFechaInicio
             // 
             lblFechaInicio.AutoSize = true;
-            lblFechaInicio.Location = new Point(20, 90);
+            lblFechaInicio.Location = new Point(6, 90);
             lblFechaInicio.Name = "lblFechaInicio";
             lblFechaInicio.Size = new Size(73, 15);
             lblFechaInicio.TabIndex = 0;
@@ -238,7 +238,7 @@ namespace TechStore.Vistas
             dgvReportes.Location = new Point(20, 280);
             dgvReportes.Name = "dgvReportes";
             dgvReportes.ReadOnly = true;
-            dgvReportes.Size = new Size(900, 350);
+            dgvReportes.Size = new Size(1169, 350);
             dgvReportes.TabIndex = 1;
             // 
             // lblTituloReporte
@@ -254,7 +254,7 @@ namespace TechStore.Vistas
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(940, 650);
+            ClientSize = new Size(1211, 650);
             Controls.Add(lblTituloReporte);
             Controls.Add(dgvReportes);
             Controls.Add(groupBox1);

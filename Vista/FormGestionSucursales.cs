@@ -1,6 +1,8 @@
 using TechStore.Controladores;
 using TechStore.Entidades;
 using TechStore.Modelo;
+using System.Linq;
+using System.Reflection;
 
 namespace TechStore.Vistas
 {
@@ -21,7 +23,18 @@ namespace TechStore.Vistas
         private void CargarDatos()
         {
             dgvSucursales.DataSource = null;
-            dgvSucursales.DataSource = _controller.ObtenerTodas();
+            var sucursales = _controller.ObtenerTodas();
+            dgvSucursales.DataSource = sucursales.Select(s => new
+            {
+                s.Id,
+                s.Nombre,
+                s.Direccion,
+                s.Telefono,
+                Productos = s.Productos != null && s.Productos.Any()
+                    ? string.Join(" - ", s.Productos.Select(p => p.Nombre))
+                    : "",
+                Ventas = s.Ventas?.Count ?? 0
+            }).ToList();
             LimpiarFormulario();
         }
 
@@ -33,15 +46,15 @@ namespace TechStore.Vistas
             txtTelefono.Clear();
             btnActualizar.Enabled = false;
             btnEliminar.Enabled = false;
-            btnNuevo.Enabled = true;
+            btnLimpiar.Enabled = true;
         }
 
-        private void btnNuevo_Click(object sender, EventArgs e)
+        private void btnLimpiar_Click(object sender, EventArgs e)
         {
             LimpiarFormulario();
         }
 
-        private void btnGuardar_Click(object sender, EventArgs e)
+        private void btnCrear_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrWhiteSpace(txtNombre.Text))
             {
@@ -62,53 +75,80 @@ namespace TechStore.Vistas
                 Telefono = string.IsNullOrWhiteSpace(txtTelefono.Text) ? null : txtTelefono.Text.Trim()
             };
 
-            if (_sucursalSeleccionada == null)
+            // Guardar siempre crea nuevo, ignorando cualquier selección
+            if (_controller.Crear(sucursal))
             {
-                if (_controller.Crear(sucursal))
-                {
-                    MessageBox.Show("Sucursal creada exitosamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    CargarDatos();
-                }
-                else
-                {
-                    MessageBox.Show("Error al crear la sucursal.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
+                MessageBox.Show("Sucursal creada exitosamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                LimpiarFormulario();
+                CargarDatos();
             }
             else
             {
-                sucursal.Id = _sucursalSeleccionada.Id;
-                if (_controller.Actualizar(sucursal))
-                {
-                    MessageBox.Show("Sucursal actualizada exitosamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    CargarDatos();
-                }
-                else
-                {
-                    MessageBox.Show("Error al actualizar la sucursal.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
+                MessageBox.Show("Error al crear la sucursal.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
         private void btnActualizar_Click(object sender, EventArgs e)
         {
             if (_sucursalSeleccionada == null)
+            {
+                MessageBox.Show("Seleccione una sucursal para actualizar.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
+            }
 
-            txtNombre.Text = _sucursalSeleccionada.Nombre;
-            txtDireccion.Text = _sucursalSeleccionada.Direccion;
-            txtTelefono.Text = _sucursalSeleccionada.Telefono ?? "";
-            btnActualizar.Enabled = false;
-            btnNuevo.Enabled = true;
+            if (string.IsNullOrWhiteSpace(txtNombre.Text))
+            {
+                MessageBox.Show("El nombre es requerido.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (string.IsNullOrWhiteSpace(txtDireccion.Text))
+            {
+                MessageBox.Show("La dirección es requerida.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            var sucursal = new Sucursal
+            {
+                Id = _sucursalSeleccionada.Id,
+                Nombre = txtNombre.Text.Trim(),
+                Direccion = txtDireccion.Text.Trim(),
+                Telefono = string.IsNullOrWhiteSpace(txtTelefono.Text) ? null : txtTelefono.Text.Trim()
+            };
+
+            if (_controller.Actualizar(sucursal))
+            {
+                MessageBox.Show("Sucursal actualizada exitosamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                LimpiarFormulario();
+                CargarDatos();
+            }
+            else
+            {
+                MessageBox.Show("Error al actualizar la sucursal.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void dgvSucursales_SelectionChanged(object sender, EventArgs e)
         {
             if (dgvSucursales.SelectedRows.Count > 0)
             {
-                _sucursalSeleccionada = (Sucursal)dgvSucursales.SelectedRows[0].DataBoundItem;
-                btnActualizar.Enabled = true;
-                btnEliminar.Enabled = true;
-                btnNuevo.Enabled = true;
+                // Obtener el ID del objeto anónimo
+                var selectedRow = dgvSucursales.SelectedRows[0].DataBoundItem;
+                var idProperty = selectedRow.GetType().GetProperty("Id");
+                if (idProperty != null)
+                {
+                    int sucursalId = (int)idProperty.GetValue(selectedRow)!;
+                    _sucursalSeleccionada = _controller.ObtenerPorId(sucursalId);
+                    if (_sucursalSeleccionada != null)
+                    {
+                        txtNombre.Text = _sucursalSeleccionada.Nombre;
+                        txtDireccion.Text = _sucursalSeleccionada.Direccion;
+                        txtTelefono.Text = _sucursalSeleccionada.Telefono ?? "";
+                    }
+                    btnActualizar.Enabled = true;
+                    btnEliminar.Enabled = true;
+                    btnLimpiar.Enabled = true;
+                }
             }
         }
 

@@ -15,7 +15,11 @@ namespace TechStore.Controladores
 
         public List<Sucursal> ObtenerTodas()
         {
-            return _context.Sucursales.AsNoTracking().ToList();
+            return _context.Sucursales
+                .Include(s => s.Productos)
+                .Include(s => s.Ventas)
+                .AsNoTracking()
+                .ToList();
         }
 
         public Sucursal? ObtenerPorId(int id)

@@ -39,12 +39,18 @@ namespace TechStore.Controladores
                 .ToList();
         }
 
-        public List<Producto> ConsultarDisponibilidad(int sucursalId, string? nombre = null)
+        public List<Producto> ConsultarDisponibilidad(int? sucursalId, string? nombre = null)
         {
             var query = _context.Productos
                 .Include(p => p.Categoria)
                 .Include(p => p.Sucursal)
-                .Where(p => p.SucursalId == sucursalId && p.Stock > 0);
+                .Where(p => p.Stock > 0);
+
+            // Si sucursalId es null o -1, no filtra por sucursal (muestra todas)
+            if (sucursalId.HasValue && sucursalId.Value > 0)
+            {
+                query = query.Where(p => p.SucursalId == sucursalId.Value);
+            }
 
             if (!string.IsNullOrEmpty(nombre))
             {

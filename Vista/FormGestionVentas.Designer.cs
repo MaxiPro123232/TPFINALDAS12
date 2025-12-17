@@ -336,11 +336,12 @@ namespace TechStore.Vistas
             // 
             // btnNuevaVenta
             // 
+            btnNuevaVenta.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             btnNuevaVenta.Location = new Point(760, 460);
             btnNuevaVenta.Name = "btnNuevaVenta";
             btnNuevaVenta.Size = new Size(180, 60);
             btnNuevaVenta.TabIndex = 5;
-            btnNuevaVenta.Text = "Nueva Venta";
+            btnNuevaVenta.Text = "Limpiar";
             btnNuevaVenta.UseVisualStyleBackColor = true;
             btnNuevaVenta.Click += btnNuevaVenta_Click;
             // 

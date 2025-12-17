@@ -1,6 +1,8 @@
 using TechStore.Controladores;
 using TechStore.Entidades;
 using TechStore.Modelo;
+using System.Linq;
+using System.Reflection;
 
 namespace TechStore.Vistas
 {
@@ -32,7 +34,17 @@ namespace TechStore.Vistas
         private void CargarDatos()
         {
             dgvVendedores.DataSource = null;
-            dgvVendedores.DataSource = _controller.ObtenerTodos();
+            var vendedores = _controller.ObtenerTodos();
+            dgvVendedores.DataSource = vendedores.Select(v => new
+            {
+                v.Id,
+                v.Codigo,
+                v.Nombre,
+                v.Apellido,
+                v.Telefono,
+                Sucursal = v.Sucursal?.Nombre ?? "",
+                Ventas = v.Ventas?.Count ?? 0
+            }).ToList();
             LimpiarFormulario();
         }
 
@@ -46,15 +58,15 @@ namespace TechStore.Vistas
             cmbSucursal.SelectedIndex = -1;
             btnActualizar.Enabled = false;
             btnEliminar.Enabled = false;
-            btnNuevo.Enabled = true;
+            btnLimpiar.Enabled = true;
         }
 
-        private void btnNuevo_Click(object sender, EventArgs e)
+        private void btnLimpiar_Click(object sender, EventArgs e)
         {
             LimpiarFormulario();
         }
 
-        private void btnGuardar_Click(object sender, EventArgs e)
+        private void btnCrear_Click(object sender, EventArgs e)
         {
             if (!ValidarDatos())
                 return;
@@ -68,46 +80,50 @@ namespace TechStore.Vistas
                 SucursalId = (int)cmbSucursal.SelectedValue
             };
 
-            if (_vendedorSeleccionado == null)
+            // Guardar siempre crea nuevo, ignorando cualquier selección
+            if (_controller.Crear(vendedor))
             {
-                if (_controller.Crear(vendedor))
-                {
-                    MessageBox.Show("Vendedor creado exitosamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    CargarDatos();
-                }
-                else
-                {
-                    MessageBox.Show("Error al crear el vendedor. Verifique que el código no esté duplicado.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
+                MessageBox.Show("Vendedor creado exitosamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                LimpiarFormulario();
+                CargarDatos();
             }
             else
             {
-                vendedor.Id = _vendedorSeleccionado.Id;
-                if (_controller.Actualizar(vendedor))
-                {
-                    MessageBox.Show("Vendedor actualizado exitosamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    CargarDatos();
-                }
-                else
-                {
-                    MessageBox.Show("Error al actualizar el vendedor.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
+                MessageBox.Show("Error al crear el vendedor. Verifique que el código no esté duplicado.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
         private void btnActualizar_Click(object sender, EventArgs e)
         {
             if (_vendedorSeleccionado == null)
+            {
+                MessageBox.Show("Seleccione un vendedor para actualizar.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (!ValidarDatos())
                 return;
 
-            txtCodigo.Text = _vendedorSeleccionado.Codigo;
-            txtNombre.Text = _vendedorSeleccionado.Nombre;
-            txtApellido.Text = _vendedorSeleccionado.Apellido ?? "";
-            txtTelefono.Text = _vendedorSeleccionado.Telefono ?? "";
-            cmbSucursal.SelectedValue = _vendedorSeleccionado.SucursalId;
-            btnActualizar.Enabled = false;
-            btnEliminar.Enabled = false;
-            btnNuevo.Enabled = true;
+            var vendedor = new Vendedor
+            {
+                Id = _vendedorSeleccionado.Id,
+                Codigo = txtCodigo.Text.Trim(),
+                Nombre = txtNombre.Text.Trim(),
+                Apellido = string.IsNullOrWhiteSpace(txtApellido.Text) ? null : txtApellido.Text.Trim(),
+                Telefono = string.IsNullOrWhiteSpace(txtTelefono.Text) ? null : txtTelefono.Text.Trim(),
+                SucursalId = (int)cmbSucursal.SelectedValue
+            };
+
+            if (_controller.Actualizar(vendedor))
+            {
+                MessageBox.Show("Vendedor actualizado exitosamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                LimpiarFormulario();
+                CargarDatos();
+            }
+            else
+            {
+                MessageBox.Show("Error al actualizar el vendedor.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void btnEliminar_Click(object sender, EventArgs e)
@@ -133,11 +149,25 @@ namespace TechStore.Vistas
         {
             if (dgvVendedores.SelectedRows.Count > 0)
             {
-                var vendedor = (Vendedor)dgvVendedores.SelectedRows[0].DataBoundItem;
-                _vendedorSeleccionado = _controller.ObtenerPorId(vendedor.Id);
-                btnActualizar.Enabled = true;
-                btnEliminar.Enabled = true;
-                btnNuevo.Enabled = true;
+                // Obtener el ID del objeto anónimo
+                var selectedRow = dgvVendedores.SelectedRows[0].DataBoundItem;
+                var idProperty = selectedRow.GetType().GetProperty("Id");
+                if (idProperty != null)
+                {
+                    int vendedorId = (int)idProperty.GetValue(selectedRow)!;
+                    _vendedorSeleccionado = _controller.ObtenerPorId(vendedorId);
+                    if (_vendedorSeleccionado != null)
+                    {
+                        txtCodigo.Text = _vendedorSeleccionado.Codigo;
+                        txtNombre.Text = _vendedorSeleccionado.Nombre;
+                        txtApellido.Text = _vendedorSeleccionado.Apellido ?? "";
+                        txtTelefono.Text = _vendedorSeleccionado.Telefono ?? "";
+                        cmbSucursal.SelectedValue = _vendedorSeleccionado.SucursalId;
+                    }
+                    btnActualizar.Enabled = true;
+                    btnEliminar.Enabled = true;
+                    btnLimpiar.Enabled = true;
+                }
             }
         }
 

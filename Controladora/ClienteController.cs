@@ -15,7 +15,10 @@ namespace TechStore.Controladores
 
         public List<Cliente> ObtenerTodos()
         {
-            return _context.Clientes.AsNoTracking().ToList();
+            return _context.Clientes
+                .Include(c => c.Ventas)
+                .AsNoTracking()
+                .ToList();
         }
 
         public Cliente? ObtenerPorId(int id)

@@ -1,6 +1,8 @@
 using TechStore.Controladores;
 using TechStore.Entidades;
 using TechStore.Modelo;
+using System.Linq;
+using System.Reflection;
 
 namespace TechStore.Vistas
 {
@@ -21,7 +23,16 @@ namespace TechStore.Vistas
         private void CargarDatos()
         {
             dgvCategorias.DataSource = null;
-            dgvCategorias.DataSource = _controller.ObtenerTodas();
+            var categorias = _controller.ObtenerTodas();
+            dgvCategorias.DataSource = categorias.Select(c => new
+            {
+                c.Id,
+                c.Nombre,
+                c.Descripcion,
+                Productos = c.Productos != null && c.Productos.Any() 
+                    ? string.Join(" - ", c.Productos.Select(p => p.Nombre))
+                    : ""
+            }).ToList();
             LimpiarFormulario();
         }
 
@@ -32,15 +43,15 @@ namespace TechStore.Vistas
             txtDescripcion.Clear();
             btnActualizar.Enabled = false;
             btnEliminar.Enabled = false;
-            btnNuevo.Enabled = true;
+            btnLimpiar.Enabled = true;
         }
 
-        private void btnNuevo_Click(object sender, EventArgs e)
+        private void btnLimpiar_Click(object sender, EventArgs e)
         {
             LimpiarFormulario();
         }
 
-        private void btnGuardar_Click(object sender, EventArgs e)
+        private void btnCrear_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrWhiteSpace(txtNombre.Text))
             {
@@ -54,43 +65,50 @@ namespace TechStore.Vistas
                 Descripcion = txtDescripcion.Text.Trim()
             };
 
-            if (_categoriaSeleccionada == null)
+            // Guardar siempre crea nuevo, ignorando cualquier selección
+            if (_controller.Crear(categoria))
             {
-                if (_controller.Crear(categoria))
-                {
-                    MessageBox.Show("Categoría creada exitosamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    CargarDatos();
-                }
-                else
-                {
-                    MessageBox.Show("Error al crear la categoría.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
+                MessageBox.Show("Categoría creada exitosamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                LimpiarFormulario();
+                CargarDatos();
             }
             else
             {
-                categoria.Id = _categoriaSeleccionada.Id;
-                if (_controller.Actualizar(categoria))
-                {
-                    MessageBox.Show("Categoría actualizada exitosamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    CargarDatos();
-                }
-                else
-                {
-                    MessageBox.Show("Error al actualizar la categoría.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
+                MessageBox.Show("Error al crear la categoría.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
         private void btnActualizar_Click(object sender, EventArgs e)
         {
             if (_categoriaSeleccionada == null)
+            {
+                MessageBox.Show("Seleccione una categoría para actualizar.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
+            }
 
-            txtNombre.Text = _categoriaSeleccionada.Nombre;
-            txtDescripcion.Text = _categoriaSeleccionada.Descripcion ?? "";
-            btnActualizar.Enabled = false;
-            btnEliminar.Enabled = false;
-            btnNuevo.Enabled = true;
+            if (string.IsNullOrWhiteSpace(txtNombre.Text))
+            {
+                MessageBox.Show("El nombre es requerido.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            var categoria = new Categoria
+            {
+                Id = _categoriaSeleccionada.Id,
+                Nombre = txtNombre.Text.Trim(),
+                Descripcion = txtDescripcion.Text.Trim()
+            };
+
+            if (_controller.Actualizar(categoria))
+            {
+                MessageBox.Show("Categoría actualizada exitosamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                LimpiarFormulario();
+                CargarDatos();
+            }
+            else
+            {
+                MessageBox.Show("Error al actualizar la categoría.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void btnEliminar_Click(object sender, EventArgs e)
@@ -116,10 +134,22 @@ namespace TechStore.Vistas
         {
             if (dgvCategorias.SelectedRows.Count > 0)
             {
-                _categoriaSeleccionada = (Categoria)dgvCategorias.SelectedRows[0].DataBoundItem;
-                btnActualizar.Enabled = true;
-                btnEliminar.Enabled = true;
-                btnNuevo.Enabled = true;
+                // Obtener el ID del objeto anónimo
+                var selectedRow = dgvCategorias.SelectedRows[0].DataBoundItem;
+                var idProperty = selectedRow.GetType().GetProperty("Id");
+                if (idProperty != null)
+                {
+                    int categoriaId = (int)idProperty.GetValue(selectedRow)!;
+                    _categoriaSeleccionada = _controller.ObtenerPorId(categoriaId);
+                    if (_categoriaSeleccionada != null)
+                    {
+                        txtNombre.Text = _categoriaSeleccionada.Nombre;
+                        txtDescripcion.Text = _categoriaSeleccionada.Descripcion ?? "";
+                    }
+                    btnActualizar.Enabled = true;
+                    btnEliminar.Enabled = true;
+                    btnLimpiar.Enabled = true;
+                }
             }
         }
 
