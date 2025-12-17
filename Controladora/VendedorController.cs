@@ -12,21 +12,25 @@ namespace TechStore.Controladores
             _repositorio = new RepositorioVendedor();
         }
 
+        // Retorna todos los vendedores. No modifica BD.
         public List<Vendedor> ObtenerTodos()
         {
             return _repositorio.ListarVendedores();
         }
 
+        // Busca un vendedor por ID. Parámetros: id. Retorna el vendedor o null.
         public Vendedor? ObtenerPorId(int id)
         {
             return _repositorio.BuscarVendedorPorId(id);
         }
 
+        // Retorna vendedores de una sucursal específica. Parámetros: sucursalId. No modifica BD.
         public List<Vendedor> ObtenerPorSucursal(int sucursalId)
         {
             return _repositorio.ListarVendedoresPorSucursal(sucursalId);
         }
 
+        // Crea un nuevo vendedor. Valida duplicados por código. Parámetros: vendedor. Retorna true si se creó, false si falló o código duplicado.
         public bool Crear(Vendedor vendedor)
         {
             try
@@ -45,6 +49,7 @@ namespace TechStore.Controladores
             }
         }
 
+        // Actualiza un vendedor existente. Valida duplicados por código. Parámetros: vendedor (con ID y datos nuevos). Retorna true si se actualizó, false si falló.
         public bool Actualizar(Vendedor vendedor)
         {
             try
@@ -75,6 +80,7 @@ namespace TechStore.Controladores
             }
         }
 
+        // Elimina un vendedor si no tiene ventas asociadas. Parámetros: id. Retorna true si se eliminó, false si falló o tiene ventas.
         public bool Eliminar(int id)
         {
             try

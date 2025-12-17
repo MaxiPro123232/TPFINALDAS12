@@ -12,21 +12,25 @@ namespace TechStore.Controladores
             _repositorio = new RepositorioCliente();
         }
 
+        // Retorna todos los clientes. No modifica BD.
         public List<Cliente> ObtenerTodos()
         {
             return _repositorio.ListarClientes();
         }
 
+        // Busca un cliente por ID. Parámetros: id. Retorna el cliente o null.
         public Cliente? ObtenerPorId(int id)
         {
             return _repositorio.BuscarClientePorId(id);
         }
 
+        // Retorna clientes filtrados por tipo. Parámetros: tipo. No modifica BD.
         public List<Cliente> ObtenerPorTipo(TipoCliente tipo)
         {
             return _repositorio.ListarClientesPorTipo(tipo);
         }
 
+        // Crea un nuevo cliente. Valida duplicados por código. Parámetros: cliente. Retorna true si se creó, false si falló o código duplicado.
         public bool Crear(Cliente cliente)
         {
             try
@@ -45,6 +49,7 @@ namespace TechStore.Controladores
             }
         }
 
+        // Actualiza un cliente existente. Valida duplicados por código. Parámetros: cliente (con ID y datos nuevos). Retorna true si se actualizó, false si falló.
         public bool Actualizar(Cliente cliente)
         {
             try
@@ -78,6 +83,7 @@ namespace TechStore.Controladores
             }
         }
 
+        // Elimina un cliente si no tiene ventas asociadas. Parámetros: id. Retorna true si se eliminó, false si falló o tiene ventas.
         public bool Eliminar(int id)
         {
             try
@@ -98,16 +104,19 @@ namespace TechStore.Controladores
             }
         }
 
+        // Retorna el historial de compras de un cliente. Parámetros: clienteId. No modifica BD.
         public List<Venta> ObtenerHistorialCompras(int clienteId)
         {
             return _repositorio.ObtenerHistorialCompras(clienteId);
         }
 
+        // Obtiene el saldo de cuenta corriente de un cliente. Parámetros: clienteId. Retorna el saldo o 0. No modifica BD.
         public decimal ObtenerSaldoCuentaCorriente(int clienteId)
         {
             return _repositorio.ObtenerSaldoCuentaCorriente(clienteId);
         }
 
+        // Actualiza el saldo de cuenta corriente de un cliente. Parámetros: clienteId, monto (puede ser negativo). Retorna true si se actualizó, false si falló. Modifica BD.
         public bool ActualizarSaldoCuentaCorriente(int clienteId, decimal monto)
         {
             try

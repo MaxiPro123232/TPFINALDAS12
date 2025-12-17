@@ -13,26 +13,31 @@ namespace TechStore.Controladores
             _repositorio = new RepositorioProducto();
         }
 
+        // Retorna todos los productos. No modifica BD.
         public List<Producto> ObtenerTodos()
         {
             return _repositorio.ListarProductos();
         }
 
+        // Busca un producto por ID. Parámetros: id. Retorna el producto o null.
         public Producto? ObtenerPorId(int id)
         {
             return _repositorio.BuscarProductoPorId(id);
         }
 
+        // Retorna productos de una sucursal específica. Parámetros: sucursalId. No modifica BD.
         public List<Producto> ObtenerPorSucursal(int sucursalId)
         {
             return _repositorio.ListarProductosPorSucursal(sucursalId);
         }
 
+        // Busca productos disponibles filtrados por sucursal y/o nombre. Parámetros: sucursalId (opcional), nombre (opcional). No modifica BD.
         public List<Producto> ConsultarDisponibilidad(int? sucursalId, string? nombre = null)
         {
             return _repositorio.ConsultarDisponibilidad(sucursalId, nombre);
         }
 
+        // Crea un nuevo producto. Valida duplicados por código. Parámetros: producto. Retorna true si se creó, false si falló o código duplicado.
         public bool Crear(Producto producto)
         {
             try
@@ -53,6 +58,7 @@ namespace TechStore.Controladores
             }
         }
 
+        // Actualiza un producto existente. Valida duplicados por código. Parámetros: producto (con ID y datos nuevos). Retorna true si se actualizó, false si falló.
         public bool Actualizar(Producto producto)
         {
             try
@@ -79,6 +85,7 @@ namespace TechStore.Controladores
             }
         }
 
+        // Elimina un producto. Parámetros: id. Retorna true si se eliminó, false si falló.
         public bool Eliminar(int id)
         {
             try
@@ -94,6 +101,7 @@ namespace TechStore.Controladores
             }
         }
 
+        // Actualiza el stock de un producto. Parámetros: productoId, cantidad (puede ser negativa). Retorna true si se actualizó, false si falló. Modifica BD.
         public bool ActualizarStock(int productoId, int cantidad)
         {
             return _repositorio.ActualizarStock(productoId, cantidad);

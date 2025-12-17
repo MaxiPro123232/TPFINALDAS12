@@ -147,6 +147,7 @@ namespace TechStore.Vistas
             }).ToList();
         }
 
+        // Calcula subtotal, descuento del cliente y total de la venta. Actualiza los labels correspondientes.
         private void CalcularTotales()
         {
             decimal subtotal = _detallesVenta.Sum(d => d.Subtotal);
@@ -179,6 +180,7 @@ namespace TechStore.Vistas
             }
         }
 
+        // Procesa la venta completa: valida datos, crea la venta y sus detalles, actualiza stock. Muestra mensaje de éxito o error.
         private void btnProcesarVenta_Click(object sender, EventArgs e)
         {
             if (!ValidarVenta())

@@ -12,16 +12,19 @@ namespace TechStore.Controladores
             _repositorio = new RepositorioSucursal();
         }
 
+        // Retorna todas las sucursales. No modifica BD.
         public List<Sucursal> ObtenerTodas()
         {
             return _repositorio.ListarSucursales();
         }
 
+        // Busca una sucursal por ID. Parámetros: id. Retorna la sucursal o null.
         public Sucursal? ObtenerPorId(int id)
         {
             return _repositorio.BuscarSucursalPorId(id);
         }
 
+        // Crea una nueva sucursal. Parámetros: sucursal. Retorna true si se creó, false si falló.
         public bool Crear(Sucursal sucursal)
         {
             try
@@ -35,6 +38,7 @@ namespace TechStore.Controladores
             }
         }
 
+        // Actualiza una sucursal existente. Parámetros: sucursal (con ID y datos nuevos). Retorna true si se actualizó, false si falló.
         public bool Actualizar(Sucursal sucursal)
         {
             try
@@ -56,6 +60,7 @@ namespace TechStore.Controladores
             }
         }
 
+        // Elimina una sucursal si no tiene productos ni ventas asociadas. Parámetros: id. Retorna true si se eliminó, false si falló o tiene productos/ventas.
         public bool Eliminar(int id)
         {
             try

@@ -53,13 +53,13 @@ namespace TechStore.Vistas
             cmbSucursalConsulta.SelectedIndex = 0; // Seleccionar "Todas" por defecto
         }
 
+        // Carga todos los productos en el DataGridView. Transforma entidades a objetos anónimos para mostrar solo datos necesarios.
         private void CargarDatos()
         {
-            _cargandoDatos = true; // Activar bandera para evitar que SelectionChanged se ejecute
+            _cargandoDatos = true;
             
             try
             {
-                // Limpiar selección antes de cargar datos
                 dgvProductos.ClearSelection();
                 dgvProductos.DataSource = null;
                 
@@ -279,6 +279,7 @@ namespace TechStore.Vistas
             }
         }
 
+        // Consulta productos disponibles filtrados por sucursal y/o nombre. Muestra resultados en el DataGridView.
         private void btnConsultar_Click(object sender, EventArgs e)
         {
             if (cmbSucursalConsulta.SelectedValue == null)
@@ -319,6 +320,7 @@ namespace TechStore.Vistas
             }
         }
 
+        // Valida que los campos requeridos estén completos y en formato correcto. Retorna true si es válido, false si no.
         private bool ValidarDatos()
         {
             if (string.IsNullOrWhiteSpace(txtCodigo.Text))

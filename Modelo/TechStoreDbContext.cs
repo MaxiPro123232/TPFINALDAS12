@@ -13,7 +13,9 @@ namespace TechStore.Modelo
         public DbSet<Venta> Ventas { get; set; }
         public DbSet<DetalleVenta> DetalleVentas { get; set; }
 
-        private string conexion = "Data Source=MAXOPC\\SQLEXPRESS;Initial Catalog=TECHSTORE;Integrated Security=True;Persist Security Info=False;Pooling=False;Encrypt=False";
+        private string conexion = "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=TECHSTORE;Integrated Security=True;Persist Security Info=False;Pooling=False;Encrypt=False";
+        
+        // Configura la conexión a SQL Server LocalDB si no está ya configurada.
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
@@ -21,12 +23,14 @@ namespace TechStore.Modelo
                 optionsBuilder.UseSqlServer(conexion);
             }
         }
-
+      
+        // Configura las entidades del modelo: índices únicos y comportamientos de eliminación.
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            // base.OnModelCreating: aplica las configuraciones por defecto de Entity Framework antes de las personalizadas.
             base.OnModelCreating(modelBuilder);
 
-            // Índices únicos (requeridos - no se pueden definir solo con Data Annotations)
+            // HasIndex: define un índice para mejorar búsquedas. IsUnique: asegura que no haya valores duplicados.
             modelBuilder.Entity<Producto>()
                 .HasIndex(e => e.Codigo)
                 .IsUnique();
@@ -43,12 +47,11 @@ namespace TechStore.Modelo
                 .HasIndex(e => e.NumeroFactura)
                 .IsUnique();
 
-            // Comportamiento de eliminación para integridad referencial
-            // (Las relaciones ya están definidas con [ForeignKey] en las entidades)
+            // OnDelete: define qué pasa cuando se elimina la entidad relacionada. Cascade = se eliminan también los detalles.
             modelBuilder.Entity<DetalleVenta>()
                 .HasOne(d => d.Venta)
                 .WithMany(v => v.DetalleVentas)
-                .OnDelete(DeleteBehavior.Cascade); // Si se elimina una venta, se eliminan sus detalles
+                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

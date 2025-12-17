@@ -12,16 +12,19 @@ namespace TechStore.Controladores
             _repositorio = new RepositorioCategoria();
         }
 
+        // Retorna todas las categorías. No modifica BD.
         public List<Categoria> ObtenerTodas()
         {
             return _repositorio.ListarCategorias();
         }
 
+        // Busca una categoría por ID. Parámetros: id. Retorna la categoría o null.
         public Categoria? ObtenerPorId(int id)
         {
             return _repositorio.BuscarCategoriaPorId(id);
         }
 
+        // Crea una nueva categoría. Parámetros: categoria. Retorna true si se creó, false si falló.
         public bool Crear(Categoria categoria)
         {
             try
@@ -35,6 +38,7 @@ namespace TechStore.Controladores
             }
         }
 
+        // Actualiza una categoría existente. Parámetros: categoria (con ID y datos nuevos). Retorna true si se actualizó, false si falló.
         public bool Actualizar(Categoria categoria)
         {
             try
@@ -55,6 +59,7 @@ namespace TechStore.Controladores
             }
         }
 
+        // Elimina una categoría si no tiene productos asociados. Parámetros: id. Retorna true si se eliminó, false si falló o tiene productos.
         public bool Eliminar(int id)
         {
             try

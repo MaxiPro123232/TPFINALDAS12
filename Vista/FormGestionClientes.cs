@@ -26,6 +26,7 @@ namespace TechStore.Vistas
             cmbTipoCliente.DataSource = Enum.GetValues(typeof(TipoCliente));
         }
 
+        // Carga todos los clientes en el DataGridView. Transforma entidades a objetos anónimos para mostrar solo datos necesarios.
         private void CargarDatos()
         {
             dgvClientes.DataSource = null;
