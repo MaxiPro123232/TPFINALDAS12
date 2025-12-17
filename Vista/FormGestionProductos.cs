@@ -1,6 +1,7 @@
 using TechStore.Controladores;
 using TechStore.Entidades;
 using TechStore.Modelo;
+using System;
 using System.Linq;
 using System.Reflection;
 
@@ -106,15 +107,22 @@ namespace TechStore.Vistas
             };
 
             // Guardar siempre crea nuevo, ignorando cualquier selección
-            if (_controller.Crear(producto))
+            try
             {
-                MessageBox.Show("Producto creado exitosamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                LimpiarFormulario();
-                CargarDatos();
+                if (_controller.Crear(producto))
+                {
+                    MessageBox.Show("Producto creado exitosamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    LimpiarFormulario();
+                    CargarDatos();
+                }
+                else
+                {
+                    MessageBox.Show("Error al crear el producto. Verifique que el código no esté duplicado y que todos los campos requeridos estén completos.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("Error al crear el producto. Verifique que el código no esté duplicado.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Error al crear el producto: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -141,15 +149,22 @@ namespace TechStore.Vistas
                 SucursalId = (int)cmbSucursal.SelectedValue
             };
 
-            if (_controller.Actualizar(producto))
+            try
             {
-                MessageBox.Show("Producto actualizado exitosamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                LimpiarFormulario();
-                CargarDatos();
+                if (_controller.Actualizar(producto))
+                {
+                    MessageBox.Show("Producto actualizado exitosamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    LimpiarFormulario();
+                    CargarDatos();
+                }
+                else
+                {
+                    MessageBox.Show("Error al actualizar el producto. Verifique que el código no esté duplicado y que todos los campos requeridos estén completos.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("Error al actualizar el producto.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Error al actualizar el producto: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -160,14 +175,21 @@ namespace TechStore.Vistas
 
             if (MessageBox.Show("¿Está seguro de eliminar este producto?", "Confirmar", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
-                if (_controller.Eliminar(_productoSeleccionado.Id))
+                try
                 {
-                    MessageBox.Show("Producto eliminado exitosamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    CargarDatos();
+                    if (_controller.Eliminar(_productoSeleccionado.Id))
+                    {
+                        MessageBox.Show("Producto eliminado exitosamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        CargarDatos();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Error al eliminar el producto. Verifique que no tenga ventas asociadas.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
-                else
+                catch (Exception ex)
                 {
-                    MessageBox.Show("Error al eliminar el producto.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show($"Error al eliminar el producto: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }

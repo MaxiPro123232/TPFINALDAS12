@@ -1,5 +1,6 @@
 using TechStore.Entidades;
 using TechStore.Modelo;
+using System;
 
 namespace TechStore.Controladores
 {
@@ -44,8 +45,10 @@ namespace TechStore.Controladores
                 _repositorio.AgregarProducto(producto);
                 return true;
             }
-            catch
+            catch (Exception ex)
             {
+                // Log del error para debugging
+                System.Diagnostics.Debug.WriteLine($"Error al crear producto: {ex.Message}");
                 return false;
             }
         }
@@ -65,19 +68,13 @@ namespace TechStore.Controladores
                     return false;
                 }
 
-                productoExistente.Codigo = producto.Codigo;
-                productoExistente.Nombre = producto.Nombre;
-                productoExistente.Descripcion = producto.Descripcion;
-                productoExistente.CategoriaId = producto.CategoriaId;
-                productoExistente.Precio = producto.Precio;
-                productoExistente.Stock = producto.Stock;
-                productoExistente.SucursalId = producto.SucursalId;
-
-                _repositorio.ActualizarProducto(productoExistente);
+                _repositorio.ActualizarProducto(producto);
                 return true;
             }
-            catch
+            catch (Exception ex)
             {
+                // Log del error para debugging
+                System.Diagnostics.Debug.WriteLine($"Error al actualizar producto: {ex.Message}");
                 return false;
             }
         }
@@ -89,8 +86,10 @@ namespace TechStore.Controladores
                 _repositorio.EliminarProducto(id);
                 return true;
             }
-            catch
+            catch (Exception ex)
             {
+                // Log del error para debugging
+                System.Diagnostics.Debug.WriteLine($"Error al eliminar producto: {ex.Message}");
                 return false;
             }
         }

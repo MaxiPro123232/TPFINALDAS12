@@ -26,62 +26,29 @@ namespace TechStore.Modelo
         {
             base.OnModelCreating(modelBuilder);
 
-            // Configuración de Producto
-            modelBuilder.Entity<Producto>(entity =>
-            {
-                entity.HasIndex(e => e.Codigo).IsUnique();
-                entity.HasOne(p => p.Categoria)
-                      .WithMany(c => c.Productos)
-                      .HasForeignKey(p => p.CategoriaId)
-                      .OnDelete(DeleteBehavior.Restrict);
-                entity.HasOne(p => p.Sucursal)
-                      .WithMany(s => s.Productos)
-                      .HasForeignKey(p => p.SucursalId)
-                      .OnDelete(DeleteBehavior.Restrict);
-            });
+            // Índices únicos (requeridos - no se pueden definir solo con Data Annotations)
+            modelBuilder.Entity<Producto>()
+                .HasIndex(e => e.Codigo)
+                .IsUnique();
 
-            // Configuración de Cliente
-            modelBuilder.Entity<Cliente>(entity =>
-            {
-                entity.HasIndex(e => e.Codigo).IsUnique();
-            });
+            modelBuilder.Entity<Cliente>()
+                .HasIndex(e => e.Codigo)
+                .IsUnique();
 
-            // Configuración de Venta
-            modelBuilder.Entity<Venta>(entity =>
-            {
-                entity.HasIndex(e => e.NumeroFactura).IsUnique();
-                entity.HasOne(v => v.Cliente)
-                      .WithMany(c => c.Ventas)
-                      .HasForeignKey(v => v.ClienteId)
-                      .OnDelete(DeleteBehavior.Restrict);
-                entity.HasOne(v => v.Vendedor)
-                      .WithMany(v => v.Ventas)
-                      .HasForeignKey(v => v.VendedorId)
-                      .OnDelete(DeleteBehavior.Restrict);
-                entity.HasOne(v => v.Sucursal)
-                      .WithMany(s => s.Ventas)
-                      .HasForeignKey(v => v.SucursalId)
-                      .OnDelete(DeleteBehavior.Restrict);
-            });
+            modelBuilder.Entity<Vendedor>()
+                .HasIndex(e => e.Codigo)
+                .IsUnique();
 
-            // Configuración de DetalleVenta
-            modelBuilder.Entity<DetalleVenta>(entity =>
-            {
-                entity.HasOne(d => d.Venta)
-                      .WithMany(v => v.DetalleVentas)
-                      .HasForeignKey(d => d.VentaId)
-                      .OnDelete(DeleteBehavior.Cascade);
-                entity.HasOne(d => d.Producto)
-                      .WithMany(p => p.DetalleVentas)
-                      .HasForeignKey(d => d.ProductoId)
-                      .OnDelete(DeleteBehavior.Restrict);
-            });
+            modelBuilder.Entity<Venta>()
+                .HasIndex(e => e.NumeroFactura)
+                .IsUnique();
 
-            // Configuración de Vendedor
-            modelBuilder.Entity<Vendedor>(entity =>
-            {
-                entity.HasIndex(e => e.Codigo).IsUnique();
-            });
+            // Comportamiento de eliminación para integridad referencial
+            // (Las relaciones ya están definidas con [ForeignKey] en las entidades)
+            modelBuilder.Entity<DetalleVenta>()
+                .HasOne(d => d.Venta)
+                .WithMany(v => v.DetalleVentas)
+                .OnDelete(DeleteBehavior.Cascade); // Si se elimina una venta, se eliminan sus detalles
         }
     }
 }
