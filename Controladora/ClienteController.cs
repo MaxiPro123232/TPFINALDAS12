@@ -1,61 +1,42 @@
 using TechStore.Entidades;
 using TechStore.Modelo;
-using Microsoft.EntityFrameworkCore;
 
 namespace TechStore.Controladores
 {
     public class ClienteController
     {
-        private readonly TechStoreDbContext _context;
+        private readonly RepositorioCliente _repositorio;
 
-        public ClienteController(TechStoreDbContext context)
+        public ClienteController()
         {
-            _context = context;
+            _repositorio = new RepositorioCliente();
         }
 
         public List<Cliente> ObtenerTodos()
         {
-            return _context.Clientes
-                .Include(c => c.Ventas)
-                .AsNoTracking()
-                .ToList();
+            return _repositorio.ListarClientes();
         }
 
         public Cliente? ObtenerPorId(int id)
         {
-            return _context.Clientes
-                .Include(c => c.Ventas)
-                .FirstOrDefault(c => c.Id == id);
+            return _repositorio.BuscarClientePorId(id);
         }
 
         public List<Cliente> ObtenerPorTipo(TipoCliente tipo)
         {
-            return _context.Clientes
-                .Where(c => c.TipoCliente == tipo)
-                .ToList();
+            return _repositorio.ListarClientesPorTipo(tipo);
         }
 
         public bool Crear(Cliente cliente)
         {
             try
             {
-                if (_context.Clientes.Any(c => c.Codigo == cliente.Codigo))
+                if (_repositorio.BuscarClientePorCodigo(cliente.Codigo) != null)
                 {
                     return false; // Código duplicado
                 }
 
-                // Aplicar descuento según tipo de cliente
-                if (cliente.TipoCliente == TipoCliente.Mayorista && cliente.Descuento == 0)
-                {
-                    cliente.Descuento = 15; // Descuento por defecto para mayoristas
-                }
-                else if (cliente.TipoCliente == TipoCliente.Minorista)
-                {
-                    cliente.Descuento = 0; // Sin descuento para minoristas por defecto
-                }
-
-                _context.Clientes.Add(cliente);
-                _context.SaveChanges();
+                _repositorio.AgregarCliente(cliente);
                 return true;
             }
             catch
@@ -68,12 +49,13 @@ namespace TechStore.Controladores
         {
             try
             {
-                var clienteExistente = _context.Clientes.Find(cliente.Id);
+                var clienteExistente = _repositorio.BuscarClientePorId(cliente.Id);
                 if (clienteExistente == null)
                     return false;
 
                 // Verificar si el código ya existe en otro cliente
-                if (_context.Clientes.Any(c => c.Codigo == cliente.Codigo && c.Id != cliente.Id))
+                var clienteConMismoCodigo = _repositorio.BuscarClientePorCodigo(cliente.Codigo);
+                if (clienteConMismoCodigo != null && clienteConMismoCodigo.Id != cliente.Id)
                 {
                     return false;
                 }
@@ -87,7 +69,7 @@ namespace TechStore.Controladores
                 clienteExistente.TipoCliente = cliente.TipoCliente;
                 clienteExistente.Descuento = cliente.Descuento;
 
-                _context.SaveChanges();
+                _repositorio.ActualizarCliente(clienteExistente);
                 return true;
             }
             catch
@@ -100,18 +82,14 @@ namespace TechStore.Controladores
         {
             try
             {
-                var cliente = _context.Clientes
-                    .Include(c => c.Ventas)
-                    .FirstOrDefault(c => c.Id == id);
-
+                var cliente = _repositorio.BuscarClientePorId(id);
                 if (cliente == null)
                     return false;
 
                 if (cliente.Ventas.Any())
                     return false; // No se puede eliminar si tiene ventas
 
-                _context.Clientes.Remove(cliente);
-                _context.SaveChanges();
+                _repositorio.EliminarCliente(id);
                 return true;
             }
             catch
@@ -122,32 +100,19 @@ namespace TechStore.Controladores
 
         public List<Venta> ObtenerHistorialCompras(int clienteId)
         {
-            return _context.Ventas
-                .Include(v => v.Vendedor)
-                .Include(v => v.Sucursal)
-                .Include(v => v.DetalleVentas)
-                    .ThenInclude(d => d.Producto)
-                .Where(v => v.ClienteId == clienteId)
-                .OrderByDescending(v => v.Fecha)
-                .ToList();
+            return _repositorio.ObtenerHistorialCompras(clienteId);
         }
 
         public decimal ObtenerSaldoCuentaCorriente(int clienteId)
         {
-            var cliente = _context.Clientes.Find(clienteId);
-            return cliente?.SaldoCuentaCorriente ?? 0;
+            return _repositorio.ObtenerSaldoCuentaCorriente(clienteId);
         }
 
         public bool ActualizarSaldoCuentaCorriente(int clienteId, decimal monto)
         {
             try
             {
-                var cliente = _context.Clientes.Find(clienteId);
-                if (cliente == null)
-                    return false;
-
-                cliente.SaldoCuentaCorriente += monto;
-                _context.SaveChanges();
+                _repositorio.ActualizarSaldoCuentaCorriente(clienteId, monto);
                 return true;
             }
             catch

@@ -13,11 +13,12 @@ namespace TechStore.Modelo
         public DbSet<Venta> Ventas { get; set; }
         public DbSet<DetalleVenta> DetalleVentas { get; set; }
 
+        private string conexion = "";
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer("Data Source=MAXOPC\\SQLEXPRESS;Initial Catalog=TECHSTORE;Integrated Security=True;Persist Security Info=False;Pooling=False;Encrypt=False");
+                optionsBuilder.UseSqlServer(conexion);
             }
         }
 

@@ -17,8 +17,8 @@ namespace TechStore.Vistas
         {
             InitializeComponent();
             _context = new TechStoreDbContext();
-            _controller = new VendedorController(_context);
-            _sucursalController = new SucursalController(_context);
+            _controller = new VendedorController();
+            _sucursalController = new SucursalController();
             CargarDatos();
             CargarCombos();
         }

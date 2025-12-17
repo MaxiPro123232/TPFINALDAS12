@@ -19,11 +19,11 @@ namespace TechStore.Vistas
         {
             InitializeComponent();
             _context = new TechStoreDbContext();
-            _ventaController = new VentaController(_context);
-            _clienteController = new ClienteController(_context);
-            _productoController = new ProductoController(_context);
-            _vendedorController = new VendedorController(_context);
-            _sucursalController = new SucursalController(_context);
+            _ventaController = new VentaController();
+            _clienteController = new ClienteController();
+            _productoController = new ProductoController();
+            _vendedorController = new VendedorController();
+            _sucursalController = new SucursalController();
             _detallesVenta = new List<DetalleVenta>();
             CargarCombos();
             LimpiarVenta();

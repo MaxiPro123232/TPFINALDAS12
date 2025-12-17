@@ -1,37 +1,32 @@
 using TechStore.Entidades;
 using TechStore.Modelo;
-using Microsoft.EntityFrameworkCore;
 
 namespace TechStore.Controladores
 {
     public class CategoriaController
     {
-        private readonly TechStoreDbContext _context;
+        private readonly RepositorioCategoria _repositorio;
 
-        public CategoriaController(TechStoreDbContext context)
+        public CategoriaController()
         {
-            _context = context;
+            _repositorio = new RepositorioCategoria();
         }
 
         public List<Categoria> ObtenerTodas()
         {
-            return _context.Categorias
-                .Include(c => c.Productos)
-                .AsNoTracking()
-                .ToList();
+            return _repositorio.ListarCategorias();
         }
 
         public Categoria? ObtenerPorId(int id)
         {
-            return _context.Categorias.Find(id);
+            return _repositorio.BuscarCategoriaPorId(id);
         }
 
         public bool Crear(Categoria categoria)
         {
             try
             {
-                _context.Categorias.Add(categoria);
-                _context.SaveChanges();
+                _repositorio.AgregarCategoria(categoria);
                 return true;
             }
             catch
@@ -44,14 +39,14 @@ namespace TechStore.Controladores
         {
             try
             {
-                var categoriaExistente = _context.Categorias.Find(categoria.Id);
+                var categoriaExistente = _repositorio.BuscarCategoriaPorId(categoria.Id);
                 if (categoriaExistente == null)
                     return false;
 
                 categoriaExistente.Nombre = categoria.Nombre;
                 categoriaExistente.Descripcion = categoria.Descripcion;
 
-                _context.SaveChanges();
+                _repositorio.ActualizarCategoria(categoriaExistente);
                 return true;
             }
             catch
@@ -64,18 +59,10 @@ namespace TechStore.Controladores
         {
             try
             {
-                var categoria = _context.Categorias
-                    .Include(c => c.Productos)
-                    .FirstOrDefault(c => c.Id == id);
-
-                if (categoria == null)
-                    return false;
-
-                if (categoria.Productos.Any())
+                if (_repositorio.TieneProductos(id))
                     return false; // No se puede eliminar si tiene productos
 
-                _context.Categorias.Remove(categoria);
-                _context.SaveChanges();
+                _repositorio.EliminarCategoria(id);
                 return true;
             }
             catch

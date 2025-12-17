@@ -1,7 +1,6 @@
 using TechStore.Controladores;
 using TechStore.Entidades;
 using TechStore.Modelo;
-using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Reflection;
 
@@ -19,9 +18,9 @@ namespace TechStore.Vistas
         {
             InitializeComponent();
             _context = new TechStoreDbContext();
-            _controller = new ProductoController(_context);
-            _categoriaController = new CategoriaController(_context);
-            _sucursalController = new SucursalController(_context);
+            _controller = new ProductoController();
+            _categoriaController = new CategoriaController();
+            _sucursalController = new SucursalController();
             CargarDatos();
             CargarCombos();
         }

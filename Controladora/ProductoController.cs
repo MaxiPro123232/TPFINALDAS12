@@ -1,76 +1,47 @@
 using TechStore.Entidades;
 using TechStore.Modelo;
-using Microsoft.EntityFrameworkCore;
 
 namespace TechStore.Controladores
 {
     public class ProductoController
     {
-        private readonly TechStoreDbContext _context;
+        private readonly RepositorioProducto _repositorio;
 
-        public ProductoController(TechStoreDbContext context)
+        public ProductoController()
         {
-            _context = context;
+            _repositorio = new RepositorioProducto();
         }
 
         public List<Producto> ObtenerTodos()
         {
-            return _context.Productos
-                .Include(p => p.Categoria)
-                .Include(p => p.Sucursal)
-                .AsNoTracking()
-                .ToList();
+            return _repositorio.ListarProductos();
         }
 
         public Producto? ObtenerPorId(int id)
         {
-            return _context.Productos
-                .Include(p => p.Categoria)
-                .Include(p => p.Sucursal)
-                .FirstOrDefault(p => p.Id == id);
+            return _repositorio.BuscarProductoPorId(id);
         }
 
         public List<Producto> ObtenerPorSucursal(int sucursalId)
         {
-            return _context.Productos
-                .Include(p => p.Categoria)
-                .Include(p => p.Sucursal)
-                .Where(p => p.SucursalId == sucursalId)
-                .ToList();
+            return _repositorio.ListarProductosPorSucursal(sucursalId);
         }
 
         public List<Producto> ConsultarDisponibilidad(int? sucursalId, string? nombre = null)
         {
-            var query = _context.Productos
-                .Include(p => p.Categoria)
-                .Include(p => p.Sucursal)
-                .Where(p => p.Stock > 0);
-
-            // Si sucursalId es null o -1, no filtra por sucursal (muestra todas)
-            if (sucursalId.HasValue && sucursalId.Value > 0)
-            {
-                query = query.Where(p => p.SucursalId == sucursalId.Value);
-            }
-
-            if (!string.IsNullOrEmpty(nombre))
-            {
-                query = query.Where(p => p.Nombre.Contains(nombre));
-            }
-
-            return query.AsNoTracking().ToList();
+            return _repositorio.ConsultarDisponibilidad(sucursalId, nombre);
         }
 
         public bool Crear(Producto producto)
         {
             try
             {
-                if (_context.Productos.Any(p => p.Codigo == producto.Codigo))
+                if (_repositorio.BuscarProductoPorCodigo(producto.Codigo) != null)
                 {
                     return false; // Código duplicado
                 }
 
-                _context.Productos.Add(producto);
-                _context.SaveChanges();
+                _repositorio.AgregarProducto(producto);
                 return true;
             }
             catch
@@ -83,12 +54,13 @@ namespace TechStore.Controladores
         {
             try
             {
-                var productoExistente = _context.Productos.Find(producto.Id);
+                var productoExistente = _repositorio.BuscarProductoPorId(producto.Id);
                 if (productoExistente == null)
                     return false;
 
                 // Verificar si el código ya existe en otro producto
-                if (_context.Productos.Any(p => p.Codigo == producto.Codigo && p.Id != producto.Id))
+                var productoConMismoCodigo = _repositorio.BuscarProductoPorCodigo(producto.Codigo);
+                if (productoConMismoCodigo != null && productoConMismoCodigo.Id != producto.Id)
                 {
                     return false;
                 }
@@ -101,7 +73,7 @@ namespace TechStore.Controladores
                 productoExistente.Stock = producto.Stock;
                 productoExistente.SucursalId = producto.SucursalId;
 
-                _context.SaveChanges();
+                _repositorio.ActualizarProducto(productoExistente);
                 return true;
             }
             catch
@@ -114,12 +86,7 @@ namespace TechStore.Controladores
         {
             try
             {
-                var producto = _context.Productos.Find(id);
-                if (producto == null)
-                    return false;
-
-                _context.Productos.Remove(producto);
-                _context.SaveChanges();
+                _repositorio.EliminarProducto(id);
                 return true;
             }
             catch
@@ -130,23 +97,7 @@ namespace TechStore.Controladores
 
         public bool ActualizarStock(int productoId, int cantidad)
         {
-            try
-            {
-                var producto = _context.Productos.Find(productoId);
-                if (producto == null)
-                    return false;
-
-                producto.Stock += cantidad;
-                if (producto.Stock < 0)
-                    return false; // Stock insuficiente
-
-                _context.SaveChanges();
-                return true;
-            }
-            catch
-            {
-                return false;
-            }
+            return _repositorio.ActualizarStock(productoId, cantidad);
         }
     }
 }

@@ -1,53 +1,42 @@
 using TechStore.Entidades;
 using TechStore.Modelo;
-using Microsoft.EntityFrameworkCore;
 
 namespace TechStore.Controladores
 {
     public class VendedorController
     {
-        private readonly TechStoreDbContext _context;
+        private readonly RepositorioVendedor _repositorio;
 
-        public VendedorController(TechStoreDbContext context)
+        public VendedorController()
         {
-            _context = context;
+            _repositorio = new RepositorioVendedor();
         }
 
         public List<Vendedor> ObtenerTodos()
         {
-            return _context.Vendedores
-                .Include(v => v.Sucursal)
-                .Include(v => v.Ventas)
-                .AsNoTracking()
-                .ToList();
+            return _repositorio.ListarVendedores();
         }
 
         public Vendedor? ObtenerPorId(int id)
         {
-            return _context.Vendedores
-                .Include(v => v.Sucursal)
-                .FirstOrDefault(v => v.Id == id);
+            return _repositorio.BuscarVendedorPorId(id);
         }
 
         public List<Vendedor> ObtenerPorSucursal(int sucursalId)
         {
-            return _context.Vendedores
-                .Include(v => v.Sucursal)
-                .Where(v => v.SucursalId == sucursalId)
-                .ToList();
+            return _repositorio.ListarVendedoresPorSucursal(sucursalId);
         }
 
         public bool Crear(Vendedor vendedor)
         {
             try
             {
-                if (_context.Vendedores.Any(v => v.Codigo == vendedor.Codigo))
+                if (_repositorio.BuscarVendedorPorCodigo(vendedor.Codigo) != null)
                 {
                     return false; // Código duplicado
                 }
 
-                _context.Vendedores.Add(vendedor);
-                _context.SaveChanges();
+                _repositorio.AgregarVendedor(vendedor);
                 return true;
             }
             catch
@@ -60,12 +49,13 @@ namespace TechStore.Controladores
         {
             try
             {
-                var vendedorExistente = _context.Vendedores.Find(vendedor.Id);
+                var vendedorExistente = _repositorio.BuscarVendedorPorId(vendedor.Id);
                 if (vendedorExistente == null)
                     return false;
 
                 // Verificar si el código ya existe en otro vendedor
-                if (_context.Vendedores.Any(v => v.Codigo == vendedor.Codigo && v.Id != vendedor.Id))
+                var vendedorConMismoCodigo = _repositorio.BuscarVendedorPorCodigo(vendedor.Codigo);
+                if (vendedorConMismoCodigo != null && vendedorConMismoCodigo.Id != vendedor.Id)
                 {
                     return false;
                 }
@@ -76,7 +66,7 @@ namespace TechStore.Controladores
                 vendedorExistente.Telefono = vendedor.Telefono;
                 vendedorExistente.SucursalId = vendedor.SucursalId;
 
-                _context.SaveChanges();
+                _repositorio.ActualizarVendedor(vendedorExistente);
                 return true;
             }
             catch
@@ -89,18 +79,11 @@ namespace TechStore.Controladores
         {
             try
             {
-                var vendedor = _context.Vendedores
-                    .Include(v => v.Ventas)
-                    .FirstOrDefault(v => v.Id == id);
-
-                if (vendedor == null)
-                    return false;
-
-                if (vendedor.Ventas.Any())
+                var vendedor = _repositorio.BuscarVendedorPorId(id);
+                if (vendedor != null && vendedor.Ventas.Any())
                     return false; // No se puede eliminar si tiene ventas
 
-                _context.Vendedores.Remove(vendedor);
-                _context.SaveChanges();
+                _repositorio.EliminarVendedor(id);
                 return true;
             }
             catch
