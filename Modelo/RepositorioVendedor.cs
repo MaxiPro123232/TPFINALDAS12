@@ -16,6 +16,7 @@ namespace TechStore.Modelo
         {
             return _context.Vendedores
                 .Include(v => v.Sucursal)
+                .Include(v => v.Ventas)
                 .AsNoTracking()
                 .ToList();
         }
@@ -74,4 +75,5 @@ namespace TechStore.Modelo
         }
     }
 }
+
 

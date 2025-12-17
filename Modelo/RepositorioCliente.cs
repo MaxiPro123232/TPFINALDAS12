@@ -15,6 +15,7 @@ namespace TechStore.Modelo
         public List<Cliente> ListarClientes()
         {
             return _context.Clientes
+                .Include(c => c.Ventas)
                 .AsNoTracking()
                 .ToList();
         }
@@ -113,4 +114,5 @@ namespace TechStore.Modelo
         }
     }
 }
+
 
