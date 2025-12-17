@@ -14,6 +14,7 @@ namespace TechStore.Vistas
         private CategoriaController _categoriaController;
         private SucursalController _sucursalController;
         private Producto? _productoSeleccionado;
+        private bool _cargandoDatos = false; // Bandera para evitar que SelectionChanged se ejecute durante la carga
 
         public FormGestionProductos()
         {
@@ -22,8 +23,8 @@ namespace TechStore.Vistas
             _controller = new ProductoController();
             _categoriaController = new CategoriaController();
             _sucursalController = new SucursalController();
-            CargarDatos();
-            CargarCombos();
+            CargarCombos(); // Cargar combos primero
+            CargarDatos(); // Luego cargar datos
         }
 
         private void CargarCombos()
@@ -54,32 +55,63 @@ namespace TechStore.Vistas
 
         private void CargarDatos()
         {
-            dgvProductos.DataSource = null;
-            var productos = _controller.ObtenerTodos();
-            dgvProductos.DataSource = productos.Select(p => new
+            _cargandoDatos = true; // Activar bandera para evitar que SelectionChanged se ejecute
+            
+            try
             {
-                p.Id,
-                p.Codigo,
-                p.Nombre,
-                p.Descripcion,
-                Categoria = p.Categoria?.Nombre ?? "",
-                Precio = p.Precio,
-                Stock = p.Stock,
-                Sucursal = p.Sucursal?.Nombre ?? ""
-            }).ToList();
-            LimpiarFormulario();
+                // Limpiar selección antes de cargar datos
+                dgvProductos.ClearSelection();
+                dgvProductos.DataSource = null;
+                
+                var productos = _controller.ObtenerTodos();
+                dgvProductos.DataSource = productos.Select(p => new
+                {
+                    p.Id,
+                    p.Codigo,
+                    p.Nombre,
+                    p.Descripcion,
+                    Categoria = p.Categoria?.Nombre ?? "",
+                    Precio = p.Precio,
+                    Stock = p.Stock,
+                    Sucursal = p.Sucursal?.Nombre ?? ""
+                }).ToList();
+                
+                // Asegurar que no haya selección después de cargar
+                dgvProductos.ClearSelection();
+                LimpiarFormulario();
+            }
+            finally
+            {
+                _cargandoDatos = false; // Desactivar bandera
+            }
         }
 
         private void LimpiarFormulario()
         {
             _productoSeleccionado = null;
+            
+            // Limpiar selección del DataGridView
+            if (dgvProductos.SelectedRows.Count > 0)
+            {
+                dgvProductos.ClearSelection();
+            }
+            
             txtCodigo.Clear();
             txtNombre.Clear();
             txtDescripcion.Clear();
             txtPrecio.Clear();
             txtStock.Clear();
-            cmbCategoria.SelectedIndex = -1;
-            cmbSucursal.SelectedIndex = -1;
+            
+            if (cmbCategoria.Items.Count > 0)
+            {
+                cmbCategoria.SelectedIndex = -1;
+            }
+            
+            if (cmbSucursal.Items.Count > 0)
+            {
+                cmbSucursal.SelectedIndex = -1;
+            }
+            
             btnActualizar.Enabled = false;
             btnEliminar.Enabled = false;
             btnLimpiar.Enabled = true;
@@ -196,7 +228,18 @@ namespace TechStore.Vistas
 
         private void dgvProductos_SelectionChanged(object sender, EventArgs e)
         {
-            if (dgvProductos.SelectedRows.Count > 0)
+            // No procesar si estamos cargando datos
+            if (_cargandoDatos)
+                return;
+            
+            // No procesar si no hay selección
+            if (dgvProductos.SelectedRows.Count == 0)
+            {
+                LimpiarFormulario();
+                return;
+            }
+            
+            try
             {
                 // Obtener el ID del objeto anónimo
                 var selectedRow = dgvProductos.SelectedRows[0].DataBoundItem;
@@ -212,13 +255,27 @@ namespace TechStore.Vistas
                         txtDescripcion.Text = _productoSeleccionado.Descripcion ?? "";
                         txtPrecio.Text = _productoSeleccionado.Precio.ToString();
                         txtStock.Text = _productoSeleccionado.Stock.ToString();
-                        cmbCategoria.SelectedValue = _productoSeleccionado.CategoriaId;
-                        cmbSucursal.SelectedValue = _productoSeleccionado.SucursalId;
+                        
+                        if (cmbCategoria.Items.Count > 0)
+                        {
+                            cmbCategoria.SelectedValue = _productoSeleccionado.CategoriaId;
+                        }
+                        
+                        if (cmbSucursal.Items.Count > 0)
+                        {
+                            cmbSucursal.SelectedValue = _productoSeleccionado.SucursalId;
+                        }
                     }
                     btnActualizar.Enabled = true;
                     btnEliminar.Enabled = true;
                     btnLimpiar.Enabled = true;
                 }
+            }
+            catch (Exception ex)
+            {
+                // Si hay error al cargar, limpiar formulario
+                System.Diagnostics.Debug.WriteLine($"Error en SelectionChanged: {ex.Message}");
+                LimpiarFormulario();
             }
         }
 
@@ -230,23 +287,36 @@ namespace TechStore.Vistas
                 return;
             }
 
-            int selectedId = (int)cmbSucursalConsulta.SelectedValue;
-            int? sucursalId = selectedId == -1 ? null : selectedId; // -1 significa "Todas"
-            string? nombre = string.IsNullOrWhiteSpace(txtNombreConsulta.Text) ? null : txtNombreConsulta.Text.Trim();
-
-            dgvProductos.DataSource = null;
-            var productos = _controller.ConsultarDisponibilidad(sucursalId, nombre);
-            dgvProductos.DataSource = productos.Select(p => new
+            _cargandoDatos = true; // Activar bandera para evitar que SelectionChanged se ejecute
+            
+            try
             {
-                p.Id,
-                p.Codigo,
-                p.Nombre,
-                p.Descripcion,
-                Categoria = p.Categoria?.Nombre ?? "",
-                Precio = p.Precio,
-                Stock = p.Stock,
-                Sucursal = p.Sucursal?.Nombre ?? ""
-            }).ToList();
+                int selectedId = (int)cmbSucursalConsulta.SelectedValue;
+                int? sucursalId = selectedId == -1 ? null : selectedId; // -1 significa "Todas"
+                string? nombre = string.IsNullOrWhiteSpace(txtNombreConsulta.Text) ? null : txtNombreConsulta.Text.Trim();
+
+                dgvProductos.ClearSelection();
+                dgvProductos.DataSource = null;
+                var productos = _controller.ConsultarDisponibilidad(sucursalId, nombre);
+                dgvProductos.DataSource = productos.Select(p => new
+                {
+                    p.Id,
+                    p.Codigo,
+                    p.Nombre,
+                    p.Descripcion,
+                    Categoria = p.Categoria?.Nombre ?? "",
+                    Precio = p.Precio,
+                    Stock = p.Stock,
+                    Sucursal = p.Sucursal?.Nombre ?? ""
+                }).ToList();
+                
+                dgvProductos.ClearSelection();
+                LimpiarFormulario();
+            }
+            finally
+            {
+                _cargandoDatos = false; // Desactivar bandera
+            }
         }
 
         private bool ValidarDatos()

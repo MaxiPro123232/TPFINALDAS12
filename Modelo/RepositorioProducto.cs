@@ -45,10 +45,13 @@ namespace TechStore.Modelo
 
         public Producto BuscarProductoPorCodigo(string codigo)
         {
+            if (string.IsNullOrWhiteSpace(codigo))
+                return null;
+                
             return _context.Productos
                 .Include(p => p.Categoria)
                 .Include(p => p.Sucursal)
-                .FirstOrDefault(p => p.Codigo == codigo);
+                .FirstOrDefault(p => p.Codigo.Trim().ToUpper() == codigo.Trim().ToUpper());
         }
 
         public List<Producto> ListarProductosPorSucursal(int sucursalId)
